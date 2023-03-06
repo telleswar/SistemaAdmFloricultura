@@ -147,23 +147,26 @@
             </div>
         </nav>
 
-        <ul class="nav justify-content-center submenu">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Produto</a>
-            </li>
+        @auth
+            <ul class="nav justify-content-center submenu">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Produto</a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="#">Estoque</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Estoque</a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="#">Cliente</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Cliente</a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="#">Financeiro</a>
-            </li>
-          </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Financeiro</a>
+                </li>
+            </ul>
+
+        @endauth
 
         <main class="py-4">
             @yield('content')
