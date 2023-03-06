@@ -21,6 +21,4 @@ Auth::routes();
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home');
 Route::get('/home',[HomeController::class, 'index'])->middleware('auth');
 
-//Filmes
-Route::get('/filmes/detalhes/{filme}',[PedidoController::class,'show'])->name('pedidos.show');
 
