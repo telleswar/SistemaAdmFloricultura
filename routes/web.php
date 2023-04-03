@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\ClienteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +22,9 @@ Auth::routes();
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home');
 Route::get('/home',[HomeController::class, 'index'])->middleware('auth');
 
+//Clientes
+Route::get('/clientes',[ClienteController::class,'index'])->name('clientes.index');
+Route::get('/clientes/deletar/{cliente}',[ClienteController::class,'destroy'])->middleware('auth')->name('clientes.destroy');
+Route::post('/clientes/salvar',[ClienteController::class,'store'])->middleware('auth')->name('clientes.store');
+Route::post('/clientes/atualizar/{cliente}',[ClienteController::class,'update'])->middleware('auth')->name('clientes.update');
 

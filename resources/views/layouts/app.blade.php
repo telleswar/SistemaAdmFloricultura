@@ -22,7 +22,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
-        * {
+        *,
+        .modal-title {
             color: white;
             width: 400 !important;
         }
@@ -55,7 +56,9 @@
         .card-header,
         .card-footer,
         .navbar,
-        thead {
+        thead,
+        .modal-header,
+        .modal-footer {
             background: #dc748d !important;
         }
 
@@ -64,7 +67,8 @@
         .form-control,
         .form-select,
         .dropdown-menu,
-        .submenu {
+        .submenu,
+        .modal-body {
             background: #ff8fad !important;
         }
     </style>
@@ -147,26 +151,23 @@
             </div>
         </nav>
 
-        @auth
-            <ul class="nav justify-content-center submenu">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Produto</a>
-                </li>
+        <ul class="nav justify-content-center submenu">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Produto</a>
+            </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Estoque</a>
-                </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Estoque</a>
+            </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Cliente</a>
-                </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{Route('clientes.index')}}">Cliente</a>
+            </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Financeiro</a>
-                </li>
-            </ul>
-
-        @endauth
+            <li class="nav-item">
+                <a class="nav-link" href="#">Financeiro</a>
+            </li>
+          </ul>
 
         <main class="py-4">
             @yield('content')

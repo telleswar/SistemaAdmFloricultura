@@ -1,4 +1,4 @@
-@extends('layouts.base')
+{{-- @extends('layouts.base') --}}
 
 @section('scripts')
     <script type="text/javascript">
@@ -22,5 +22,6 @@
                 }, false)
               })
           })()
+
         </script>
 @endsection
