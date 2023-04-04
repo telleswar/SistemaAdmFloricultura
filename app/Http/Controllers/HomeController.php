@@ -14,4 +14,8 @@ class HomeController extends Controller
         return view('home',compact('Pedidos'));
     }
 
+    public function editSenha(){
+        return view('auth.edit');
+    }
+
 }
