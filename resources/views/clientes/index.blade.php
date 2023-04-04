@@ -15,12 +15,16 @@
             margin-bottom: 25px;
         }
 
-        .card-text{
+        .card-text, .col-form-label{
             text-align: left;
         }
 
         .btn-add{
             margin-left: 2%;
+        }
+
+        .submit{
+            margin-top: 1%;
         }
 
     </style>

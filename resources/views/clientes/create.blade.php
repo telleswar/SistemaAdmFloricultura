@@ -42,7 +42,7 @@
                       </div>
                       <div class="form-group row">
                         <div class="offset-4 col-8">
-                          <button name="submit" type="submit" class="btn btn-success">Salvar</button>
+                          <button name="submit" type="submit" class="btn btn-success submit">Salvar</button>
                         </div>
                       </div>
                 </form>

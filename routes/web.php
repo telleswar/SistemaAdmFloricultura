@@ -23,7 +23,7 @@ Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('hom
 Route::get('/home',[HomeController::class, 'index'])->middleware('auth');
 
 //Clientes
-Route::get('/clientes',[ClienteController::class,'index'])->name('clientes.index');
+Route::get('/clientes',[ClienteController::class,'index'])->middleware('auth')->name('clientes.index');
 Route::get('/clientes/deletar/{cliente}',[ClienteController::class,'destroy'])->middleware('auth')->name('clientes.destroy');
 Route::post('/clientes/salvar',[ClienteController::class,'store'])->middleware('auth')->name('clientes.store');
 Route::post('/clientes/atualizar/{cliente}',[ClienteController::class,'update'])->middleware('auth')->name('clientes.update');
