@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('nome_pagina')
-Jaques Flores
+Jaque Flores
 @endsection

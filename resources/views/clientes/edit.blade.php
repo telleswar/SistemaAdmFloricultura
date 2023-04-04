@@ -49,7 +49,7 @@
                       </div>
                       <div class="form-group row">
                         <div class="offset-1 col-8">
-                          <button name="submit" type="submit" class="btn btn-success submit">Salvar</button>
+                          <button name="submit" type="submit" class="btn btn-success">Salvar</button>
                         </div>
                       </div>
                 </form>
