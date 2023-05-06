@@ -12,7 +12,7 @@ composer install --no-scripts
 
 <h2>Copie o arquivo .env.example</h2>
 
---Linux: cp .env.example .env
+--Linux: cp .env.example .env<br>
 --Windows: copy .env.example .env
 
 <h2>Crie uma nova chave para a aplicação</h2>
