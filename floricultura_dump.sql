@@ -35,7 +35,7 @@ CREATE TABLE `cliente` (
   `endereco` varchar(120) DEFAULT NULL,
   `cpf` varchar(11) DEFAULT NULL,
   `cnpj` varchar(14) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Dumping data for table `cliente`
@@ -57,7 +57,7 @@ CREATE TABLE `fornecedor` (
   `telefone` varchar(15) DEFAULT NULL,
   `email` varchar(120) DEFAULT NULL,
   `cnpj` varchar(14) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Dumping data for table `fornecedor`
@@ -77,7 +77,7 @@ CREATE TABLE `itens_pedido` (
   `id_produto` int NOT NULL,
   `quantidade` int DEFAULT '1',
   `valor` float DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Dumping data for table `itens_pedido`
@@ -100,7 +100,7 @@ CREATE TABLE `mov_financeira` (
   `tipo` varchar(15) DEFAULT NULL,
   `data_limite` datetime DEFAULT NULL,
   `data_pagto` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 -- --------------------------------------------------------
 
@@ -114,7 +114,7 @@ CREATE TABLE `pedido` (
   `data_criacao` datetime DEFAULT NULL,
   `data_entrega` datetime DEFAULT NULL,
   `id_cliente` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Dumping data for table `pedido`
@@ -142,7 +142,7 @@ CREATE TABLE `produto` (
   `preco_unitario` float NOT NULL,
   `estoque` int DEFAULT '0',
   `id_fornecedor` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Dumping data for table `produto`
@@ -167,7 +167,7 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `isPj` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+);
 
 --
 -- Dumping data for table `users`
