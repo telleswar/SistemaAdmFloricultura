@@ -45,7 +45,7 @@
             background-size: cover !important;
         }
 
-        hr,h3, label{
+        hr,.h3-titulo{
             color: #dc748d;
         }
 
@@ -156,6 +156,7 @@
             </div>
         </nav>
 
+        @Auth
         <ul class="nav justify-content-center submenu">
             <li class="nav-item">
                 <a class="nav-link" href="#">Produto</a>
@@ -173,6 +174,8 @@
                 <a class="nav-link" href="#">Financeiro</a>
             </li>
           </ul>
+
+        @endauth
 
         <main class="py-4">
             @yield('content')

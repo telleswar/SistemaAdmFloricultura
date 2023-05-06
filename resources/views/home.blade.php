@@ -22,7 +22,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12 mt-5">
-            <h3>Lista de pedidos</h3>
+            <h3 class="h3-titulo">Lista de pedidos</h3>
             <hr class="mt-3">
         </div>
 

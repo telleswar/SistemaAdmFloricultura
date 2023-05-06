@@ -32,7 +32,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12 mt-5">
-            <h3>Lista de clientes
+            <h3 class="h3-titulo">Lista de clientes
                 <button class="btn btn-success btn-add" data-bs-toggle="modal" data-bs-target="#create">
                     Novo cliente
                 </button>
