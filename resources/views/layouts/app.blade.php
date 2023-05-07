@@ -21,61 +21,6 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <style>
-        *,
-        .modal-title {
-            color: white;
-            width: 400 !important;
-        }
-
-        label{
-            text-align: left;
-        }
-
-        select, option, input,.dropdown-item,.nav-link{
-            color: white !important;
-        }
-        small {
-            width: 800 !important;
-        }
-
-        body {
-            min-height: 100vh !important;
-            background: #fef6ed !important;
-            background-size: cover !important;
-        }
-
-        hr,.h3-titulo{
-            color: #dc748d;
-        }
-
-        .nav > li > a:hover{
-            background-color:#d57891;
-        }
-
-        .dropdown-item:hover {
-            background: #d57891 !important;
-        }
-
-        .card-header,
-        .card-footer,
-        .navbar,
-        thead,
-        .modal-header,
-        .modal-footer {
-            background: #dc748d !important;
-        }
-
-        .card-body,
-        tbody,
-        .form-control,
-        .form-select,
-        .dropdown-menu,
-        .submenu,
-        .modal-body {
-            background: #ff8fad !important;
-        }
-    </style>
     @yield('head')
 </head>
 

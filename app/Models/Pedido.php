@@ -12,6 +12,8 @@ class Pedido extends Model
     protected $table = 'pedido';
     public $timestamps = false;
 
+    protected $dates = ['data_criacao','data_entrega'];
+
     protected $fillable = [
         'numero',
         'valor_total',
