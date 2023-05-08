@@ -9,6 +9,18 @@
             <hr class="mt-3">
         </div>
 
+        @if ($errors->any())
+            <div id="alerta"class="flex justify-between text-red-200 shadow-inner rounded p-3 bg-red-500">
+                <p class="self-center"><strong>Alerta  </strong>Não foi possível salvar os dados.</p>
+                <strong class="text-x1 align-center cursor-pointer alert-del">&times;</strong>
+            </div>    
+        @elseif (session('sucess'))
+            <div id="alerta"class="flex justify-between text-green-200 shadow-inner rounded p-3 bg-green-500">
+                <p class="self-center"><strong>Sucesso  </strong>{{session('sucess')}}</p>
+                <strong class="text-x1 align-center cursor-pointer alert-del">&times;</strong>
+            </div>  
+        @endif
+
         <div class="row text-center justify-center">
             <form class="g-3 needs-validation" method="POST" action="{{ route('auth.store') }}" novalidate>
                 @csrf

@@ -20,6 +20,7 @@ class Produto extends Model
         'descricao',
         'preco_unitario',
         'estoque',
+        'imagem'
     ];
 
 }

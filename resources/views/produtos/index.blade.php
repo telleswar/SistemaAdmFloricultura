@@ -31,12 +31,26 @@
 
         @include('produtos.create')
 
-        <div id="lista-produtos" class="row text-center">
-            @foreach ($Produtos as $produto)
+        <div id="lista-produtos" class="row text-center font-sans">
+            @foreach ($Produtos as $produto) 
                 <div class="col-xl-3 col-xs-4 col-lg-4 col-md-6 col-sm-12 col-12 d-flex ms-sm-0 ms-2 align-items-stretch justify-content-center ">
                     <div class="card bg-dark">
-                        <div class="card-header">
-                            <h2><ion-icon name="bag-outline"></ion-icon># {{$produto->id}} | {{$produto->nome}}</h2>
+                        <div class="card-header md:flex md:text-left">
+                            <div class="flex flex-wrap">
+                                <h1 class="flex-auto text-lg font-semibold text-slate-900">
+                                    @if ($produto->imagem)
+                                        <img id="imagem-produto" src="img/produtos/{{$produto->imagem}}" alt="{{$produto->nome}}" class="w-10 h-10 rounded-full">
+                                    @else
+                                        <ion-icon name="bag-outline"></ion-icon>
+                                    @endif
+                                </h1>
+                                <div class="text-lg font-semibold text-white">
+                                    {{$produto->nome}}
+                                </div>
+                                <div class="w-full flex-none text-sm font-medium text-white mt-2">
+                                    Id: #{{$produto->id}}
+                                </div>
+                              </div>
                         </div>
                         <div class="card-body">
                             <p class="card-text"><ion-icon name="bookmark-outline"></ion-icon>Tipo: {{$produto->tipo}}</p>

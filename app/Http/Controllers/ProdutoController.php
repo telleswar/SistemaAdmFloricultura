@@ -13,7 +13,6 @@ class ProdutoController extends Controller
         $price = str_replace(',', '.', $price);
         $price = trim(str_replace(['-', ',', '$','R', ' ', ' '], '', $price));
         $price = trim($price);
-        
 
         if(strpos($price, '.') !== false) {
             $dollarExplode = explode('.', $price);
@@ -36,6 +35,18 @@ class ProdutoController extends Controller
         return $price;
     }
 
+    private function upload_imagem(Request $request){
+        $nomeImg = "";
+        if($request->hasFile('imagem') && $request->file('imagem')->isValid()){
+            $reqImg = $request->imagem;
+            $extensao = $reqImg->extension();
+            $nomeImg = md5($reqImg->getClientOriginalName() . strtotime("now")).".".$extensao;
+            $reqImg->move(public_path('img/produtos'),$nomeImg);                        
+        }
+
+        return $nomeImg;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -43,7 +54,7 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        $Produtos = Produto::paginate(6);
+        $Produtos = Produto::paginate(8);
 
         return view('produtos.index',compact('Produtos'));
     }
@@ -67,12 +78,10 @@ class ProdutoController extends Controller
     public function store(Request $request)
     {
 
-        // dd($this->convertToValidPrice($request->preco_unitario));
-
-        // $request->validate([
-        //     'nome' => ['required','string','min:5','max:120'],
-        //     'tipo' => ['required','string','min:5','max:120'],
-        // ]);
+        $request->validate([
+            'nome' => ['required','string','min:3','max:120'],
+            'tipo' => ['required','string','min:3','max:120'],
+        ]);
 
         $produto = new Produto();
 
@@ -83,6 +92,8 @@ class ProdutoController extends Controller
         $produto->descricao = $request->descricao;
         $produto->estoque = 0;
         $produto->id_fornecedor = 1;
+        $produto->imagem = $this->upload_imagem($request);
+        
 
         $produto->save();
 
@@ -121,10 +132,9 @@ class ProdutoController extends Controller
     public function update(Request $request, Produto $produto)
     {
 
-        
         $request->validate([
-            'nome' => ['required','string','min:5','max:120'],
-            'tipo' => ['required','string','min:5','max:120'],
+            'nome' => ['required','string','min:3','max:120'],
+            'tipo' => ['required','string','min:3','max:120'],
         ]);
 
         $produto->nome = $request->nome;
@@ -134,6 +144,7 @@ class ProdutoController extends Controller
         $produto->descricao = $request->descricao;
         $produto->estoque = 0;
         $produto->id_fornecedor = 1;
+        $produto->imagem = $this->upload_imagem($request);
 
         $produto->save();
 

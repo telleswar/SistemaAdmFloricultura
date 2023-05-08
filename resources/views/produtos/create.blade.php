@@ -8,7 +8,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
             </div>
             <div class="modal-body">
-                <form class="g-3 needs-validation" method="POST" action="{{ route('produtos.store') }}" novalidate>
+                <form class="g-3 needs-validation" method="POST" action="{{ route('produtos.store') }}" enctype="multipart/form-data" novalidate>
                     @csrf
                     <div class="form-group row">
                         <label for="nome" class="col-4 col-form-label">Nome</label>
@@ -55,6 +55,16 @@
                         <label for="descricao" class="col-4 col-form-label">Descrição</label>
                         <div class="col-8">
                           <textarea id="descricao" name="descricao" class="form-control"></textarea>
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="imagem" class="col-4 col-form-label" >Imagem:</label>
+                        <div class="col-8">
+                          <input id="imagem" name="imagem" type="file" class="form-control from-control-file @error('imagem') is-invalid @enderror">
+                          @error('imagem')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                          @enderror
                         </div>
                       </div>
 

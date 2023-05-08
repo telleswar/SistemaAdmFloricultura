@@ -8,7 +8,7 @@ use App\Models\Cliente;
 class ClienteController extends Controller
 {
     public function index(){
-        $Clientes = Cliente::paginate(6);
+        $Clientes = Cliente::paginate(8);
 
         return view('clientes.index',compact('Clientes'));
     }
