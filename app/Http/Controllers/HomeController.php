@@ -9,12 +9,16 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $Pedidos = Pedido::get();
+        $Pedidos = Pedido::paginate(6);
 
         return view('home',compact('Pedidos'));
     }
 
-    public function editSenha(){
+    public function auth_edit(){
+        return view('auth.edit');
+    }
+
+    public function auth_update(){
         return view('auth.edit');
     }
 

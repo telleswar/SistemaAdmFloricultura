@@ -1,0 +1,79 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.modal-title {
+    color: white;
+    width: 400 !important;
+}
+
+label {
+    text-align: left;
+}
+
+select,
+option,
+input,
+#nome_home,
+.dropdown-item,
+.nav-link {
+    color: white !important;
+}
+
+small {
+    width: 800 !important;
+}
+
+body {
+    min-height: 100vh !important;
+    background: #fef6ed !important;
+    background-size: cover !important;
+}
+
+hr,
+.h3-titulo {
+    color: #dc748d;
+}
+
+.nav>li>a:hover {
+    background-color: #d57891;
+}
+
+.dropdown-item:hover {
+    background: #d57891 !important;
+}
+
+.card-header,
+.card-footer,
+.navbar,
+thead,
+.modal-header,
+.modal-footer {
+    background: #dc748d !important;
+}
+
+.card-body,
+tbody,
+.form-control,
+.form-select,
+.dropdown-menu,
+.submenu,
+.modal-body {
+    background: #ff8fad !important;
+}
+
+/* Home page */
+
+/* .card-header h2{
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+
+.card {
+    min-width: 280px !important; 
+    max-width: 280px !important;
+    overflow: hidden;
+    margin-bottom: 25px;
+} */
+ 

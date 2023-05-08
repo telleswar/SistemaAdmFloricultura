@@ -9,9 +9,9 @@
 <div class="container">
     <div class="row">
         <div class="col-12 mt-5">
-            <h3 class="h3-titulo">Lista de clientes
+            <h3 class="h3-titulo">Lista de produtos
                 <button class="btn btn-success btn-add" data-bs-toggle="modal" data-bs-target="#create">
-                    <ion-icon name="person-add-outline"></ion-icon> Novo cliente
+                    <ion-icon name="bag-add-outline"></ion-icon> Novo produto
                 </button>
             </h3>
             <hr class="mt-3">
@@ -29,37 +29,36 @@
             </div>  
         @endif
 
-        
-        
-        @include('clientes.create')
+        @include('produtos.create')
 
-        <div class="row text-center">
-            @foreach ($Clientes as $cliente)
-                <div id="lista-clientes" class="col-xl-3 col-xs-4 col-lg-4 col-md-6 col-sm-12 col-12 d-flex ms-sm-0 ms-2 align-items-stretch justify-content-center ">
+        <div id="lista-produtos" class="row text-center">
+            @foreach ($Produtos as $produto)
+                <div class="col-xl-3 col-xs-4 col-lg-4 col-md-6 col-sm-12 col-12 d-flex ms-sm-0 ms-2 align-items-stretch justify-content-center ">
                     <div class="card bg-dark">
                         <div class="card-header">
-                            <h2><ion-icon name="person-outline"></ion-icon># {{$cliente->id}} | {{$cliente->nome}}</h2>
+                            <h2><ion-icon name="bag-outline"></ion-icon># {{$produto->id}} | {{$produto->nome}}</h2>
                         </div>
                         <div class="card-body">
-                            <p class="card-text"><ion-icon name="call-outline"></ion-icon>Telefone: {{$cliente->telefone}}</p>
-                            <p class="card-text"><ion-icon name="mail-outline"></ion-icon>Email: {{$cliente->email}}</p>
-                            <p class="card-text"><ion-icon name="location-outline"></ion-icon>Endereço: {{$cliente->endereco}}</p>
-                            <p class="card-text"><ion-icon name="document-outline"></ion-icon>Documento: {{$cliente->cpf}}</p>
+                            <p class="card-text"><ion-icon name="bookmark-outline"></ion-icon>Tipo: {{$produto->tipo}}</p>
+                            <p class="card-text"><ion-icon name="pricetag-outline"></ion-icon>Custo: {{$produto->custo}}</p>
+                            <p class="card-text"><ion-icon name="pricetags-outline"></ion-icon>Preço unitário: {{$produto->preco_unitario}}</p>
+                            <p class="card-text"><ion-icon name="cube-outline"></ion-icon>Estoque: {{$produto->estoque}}</p>
+                            <p class="card-text"><ion-icon name="chatbox-outline"></ion-icon>Descrição: {{$produto->descricao}}</p>
                         </div>
                         <div class="card-footer">
-                            <button class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#editar-{{$cliente->id}}">
+                            <button class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#editar-{{$produto->id}}">
                                 <ion-icon name="pencil-outline" title="Editar"></ion-icon>
                             </button>
                             
-                            <a href="{{ Route('clientes.destroy',['cliente' => $cliente->id])}}"><button class="btn btn-danger">
+                            <a href="{{ Route('produtos.destroy',['produto' => $produto->id])}}"><button class="btn btn-danger">
                                 <ion-icon name="trash-outline" title="Excluir"></ion-icon>
                             </button></a>
                         </div>
                     </div>
                 </div>
-                @include('clientes.edit')
+                @include('produtos.edit')
             @endforeach
-            {{$Clientes->links()}}
+            {{$Produtos->links()}}
         </div>
        
         <hr class="mt-3 mb-3">

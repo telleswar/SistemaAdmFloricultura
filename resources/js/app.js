@@ -4,9 +4,9 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+// require('./bootstrap');
 
-window.Vue = require('vue').default;
+// window.Vue = require('vue').default;
 
 /**
  * The following block of code may be used to automatically register your
@@ -19,7 +19,7 @@ window.Vue = require('vue').default;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -27,6 +27,71 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app',
-});
+// const app = new Vue({
+//     el: '#app',
+// });
+
+function enviar(){
+    console.log('Passou aqui');
+    for ( var i = 0; i < currencyInput.length; i++ ) {
+        var value = e.target.value;
+        e.target.value = value ? localStringToNumber( value ) : '0';   
+    }
+}
+
+window.onload=function(){
+    var submit = document.getElementById("submit");
+
+    submit.onclick = function () {
+        enviar();
+    };
+}
+
+var alert_del = document.querySelectorAll('.alert-del');
+  alert_del.forEach((x) =>
+    x.addEventListener('click', function () {
+      x.parentElement.classList.add('hidden');
+    })
+  );
+
+
+// Tratamento para campos do tipo currency
+var currencyInput = document.querySelectorAll( 'input[type="currency"]' );
+
+for ( var i = 0; i < currencyInput.length; i++ ) {
+
+    var currency = 'BRL'
+    onBlur( {
+        target: currencyInput[ i ]
+    } )
+
+    currencyInput[ i ].addEventListener( 'focus', onFocus )
+    currencyInput[ i ].addEventListener( 'blur', onBlur )
+
+    function localStringToNumber( s ) {
+        return Number( String( s ).replace( /[^0-9.-]+/g, "" ) )
+    }
+
+    function onFocus( e ) {
+        var value = e.target.value;
+        e.target.value = value ? localStringToNumber( value ) : ''
+    }
+
+    function onBlur( e ) {
+        var value = e.target.value
+
+        var options = {
+            maximumFractionDigits: 2,
+            currency: currency,
+            style: "currency",
+            currencyDisplay: "symbol"
+        }
+
+        e.target.value = ( value || value === 0 ) ?
+            localStringToNumber( value ).toLocaleString( undefined, options ) :
+            ''
+    }
+}
+
+
+

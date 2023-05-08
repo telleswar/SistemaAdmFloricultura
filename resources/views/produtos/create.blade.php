@@ -4,71 +4,68 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Cadatro de cliente</h3>
+                <h3 class="modal-title">Cadatro de produto</h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
             </div>
             <div class="modal-body">
-                <form class="g-3 needs-validation" method="POST" action="{{ route('clientes.store') }}" novalidate>
+                <form class="g-3 needs-validation" method="POST" action="{{ route('produtos.store') }}" novalidate>
                     @csrf
                     <div class="form-group row">
                         <label for="nome" class="col-4 col-form-label">Nome</label>
                         <div class="col-8">
                           <input id="nome" name="nome" type="text" class="form-control @error('nome') is-invalid @enderror">
                         
-                        @error('nome')
-                          <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                      </div>
+                          @error('nome')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                          @enderror
+                        </div>
                       </div>
                       
                       <div class="form-group row">
-                        <label for="cpf" class="col-4 col-form-label">CPF</label>
+                        <label for="tipo" class="col-4 col-form-label" >Tipo</label>
                         <div class="col-8">
-                          <input id="cpf" name="cpf" type="text" class="form-control @error('cpf') is-invalid @enderror">
-                          @error('cpf')
+                          <input id="tipo" name="tipo" type="text" class="form-control @error('tipo') is-invalid @enderror">
+                          @error('tipo')
                             <div class="invalid-feedback">{{ $message }}</div>
                           @enderror
                         </div>
                       </div>
 
                       <div class="form-group row">
-                        <label for="email" class="col-4 col-form-label" >E-mail</label>
+                        <label for="custo" class="col-4 col-form-label" >Custo</label>    
                         <div class="col-8">
-                          <input id="email" name="email" type="text" class="form-control @error('email') is-invalid @enderror">
-                          @error('email')
+                          <input class="form-control @error('custo') is-invalid @enderror" type="currency" name="custo" id="custo" value="0.00">
+                          @error('custo')
                             <div class="invalid-feedback">{{ $message }}</div>
                           @enderror
                         </div>
                       </div>
 
                       <div class="form-group row">
-                        <label for="telefone" class="col-4 col-form-label">Telefone</label>
+                        <label for="preco_unitario" class="col-4 col-form-label" >Preço unitário</label>    
                         <div class="col-8">
-                          <input id="telefone" name="telefone" type="text" class="form-control @error('telefone') is-invalid @enderror">
-                          @error('telefone')
+                          <input class="form-control @error('preco_unitario') is-invalid @enderror" type="currency" name="preco_unitario" id="preco_unitario" value="0.00">
+                          @error('preco_unitario')
                             <div class="invalid-feedback">{{ $message }}</div>
                           @enderror
                         </div>
                       </div>
 
                       <div class="form-group row">
-                        <label for="endereco" class="col-4 col-form-label">Endereço</label>
+                        <label for="descricao" class="col-4 col-form-label">Descrição</label>
                         <div class="col-8">
-                          <input id="endereco" name="endereco" type="text" class="form-control @error('endereco') is-invalid @enderror">
-                          @error('endereco')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                          @enderror
+                          <textarea id="descricao" name="descricao" class="form-control"></textarea>
                         </div>
                       </div>
 
                       <div class="form-group row">
                         <div class="offset-4 col-8">
-                          <button name="submit" type="submit" class="btn btn-success">Salvar</button>
+                          <button id="submit" name="submit" type="submit" class="btn btn-success">Salvar</button>
                         </div>
                       </div>
                 </form>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer"> 
 
             </div>
         </div>

@@ -10,15 +10,12 @@
 
     <title>@yield('nome_pagina')</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @vite(['resources/css/app.css','resources/js/app.js'])
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     @yield('head')
@@ -34,7 +31,7 @@
                     </svg>
                 </a>
 
-                <div class="mx-auto">@yield('nome_pagina')</div>
+                <div id="nome_home" class="mx-auto">@yield('nome_pagina')</div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -42,7 +39,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class=" navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
 
@@ -59,26 +56,15 @@
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                                        fill="currentColor" class="bi bi-file-earmark-person" viewBox="0 0 16 16">
-                                        <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                                        <path
-                                            d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2v9.255S12 12 8 12s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h5.5v2z" />
-                                    </svg>
-                                    Deslogado
+                                    <ion-icon id="user-icon" name="person-circle-outline"></ion-icon> Deslogado
                                 </a>
                             </li>
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                                        fill="currentColor" class="bi bi-file-earmark-person" viewBox="0 0 16 16">
-                                        <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                                        <path
-                                            d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2v9.255S12 12 8 12s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h5.5v2z" />
-                                    </svg>
-                                    {{ Auth::user()->name }}
+                                    <ion-icon id="user-icon" name="person-circle-outline"></ion-icon>{{ Auth::user()->name }}
+                                    
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -104,7 +90,7 @@
         @Auth
         <ul class="nav justify-content-center submenu">
             <li class="nav-item">
-                <a class="nav-link" href="#">Produto</a>
+                <a class="nav-link" href="{{Route('produtos.index')}}">Produto</a>
             </li>
 
             <li class="nav-item">

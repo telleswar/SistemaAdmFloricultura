@@ -1,6 +1,11 @@
+
 .modal-title {
     color: white;
     width: 400 !important;
+}
+
+footer{
+    color: white;
 }
 
 label {
@@ -10,6 +15,7 @@ label {
 select,
 option,
 input,
+#nome_home,
 .dropdown-item,
 .nav-link {
     color: white !important;
@@ -57,6 +63,61 @@ tbody,
     background: #ff8fad !important;
 }
 
+#alerta{
+    margin-bottom: 25px;
+}
+
+#alterar-senha {
+    color: #d57891;
+}
+
+#alterar-senha label{
+    color: #d57891;
+}
+
+/* Modal */
+.col-form-label{
+    color: #fef6ed;
+}
+
+.form-control textarea{
+    color: white;
+}
+
+.form-group{
+    margin-bottom: 10px;
+}
+
+.form-control:disabled{
+    background: #dc748d !important;
+}
+
+/* Navbar */
+.dropdown{
+    display: flexbox;
+    font-size: 16px;
+    align-items: flex-start;
+}
+
+#user-icon{
+    font-size: 24px;
+    margin-right: 5px;
+}
+
+#lista-pedidos .card-text {
+    color: white;
+}
+
+
+/* Login page */
+#tela-login{
+    color: white;    
+}
+
+#tela-registro{
+    color: white;
+}
+
 /* Home page */
 
 .card-header h2{
@@ -71,4 +132,115 @@ tbody,
     overflow: hidden;
     margin-bottom: 25px;
 }
+
+/* Clientes */
+
+.btn-add{
+    display: flex;
+    margin-left: 10px;
+}
+.btn-add ion-icon{
+    margin-right: 5px;
+}
+
+#lista-clientes .card-header h2{
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+    color: white;
+    margin: 0;
+}
+
+#lista-clientes .card-header ion-icon{
+    color: white;
+    font-size: 20px !important;
+    margin-right: 5px;
+}
+
+#lista-clientes .card-text ion-icon{
+    font-size: 24px;
+    color: #d57891;
+    margin-right: 5px;
+}
+
+#lista-clientes .card-text{
+    color: white;
+    margin: 0;
+    font-size: 16px;
+    display: flex;
+}
+
+#lista-clientes .card {
+    min-width: 280px;
+    max-width: 280px;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+#lista-clientes .card-text{
+    text-align: left;
+}
+
+#lista-clientes .btn-add{
+    margin-left: 2%;
+}
+
+/* Produtos */
+
+/* Clientes */
+
+.btn-add{
+    display: flex;
+    margin-left: 10px;
+}
+.btn-add ion-icon{
+    margin-right: 5px;
+}
+
+#lista-produtos .card-header h2{
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+    color: white;
+    margin: 0;
+}
+
+#lista-produtos .card-header ion-icon{
+    color: white;
+    font-size: 20px !important;
+    margin-right: 5px;
+}
+
+#lista-produtos .card-text ion-icon{
+    font-size: 24px;
+    color: #d57891;
+    margin-right: 5px;
+}
+
+#lista-produtos .card-text{
+    color: white;
+    margin: 0;
+    font-size: 16px;
+    display: flex;
+}
+
+#lista-produtos .card {
+    min-width: 280px;
+    max-width: 280px;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+#lista-produtos .card-text{
+    text-align: left;
+}
+
+#lista-produtos .btn-add{
+    margin-left: 2%;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 
