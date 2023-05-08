@@ -32,7 +32,7 @@ class ClienteController extends Controller
             'email' => ['required','string','min:5','max:120','email'],
             'telefone' => ['required','celular_com_ddd'],
             'endereco' => ['required','string','min:8','max:120'],
-            'cpf' => ['required','cpf_ou_cnpj'],
+            'cpf' => ['required','formato_cpf'],
         ]);
 
 
@@ -62,7 +62,7 @@ class ClienteController extends Controller
             'email' => ['required','string','min:5','max:120','email'],
             'telefone' => ['required','celular_com_ddd'],
             'endereco' => ['required','string','min:8','max:120'],
-            'cpf' => ['required','cpf_ou_cnpj'],
+            'cpf' => ['required','formato_cpf'],
         ]);
 
         $cliente->nome = $request->nome;

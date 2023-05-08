@@ -18,3 +18,23 @@
         }, false)
       })
   })()
+
+
+var inputs = document.querySelectorAll(".cpf");
+
+// Loop over them and prevent submission
+Array.prototype.slice.call(inputs)
+  .forEach(function (input) {
+    input.addEventListener('keypress',()=>{
+    
+      let len = input.value.length
+
+      if(len === 3 || len === 7) {
+        input.value += '.'
+      }else if(len === 11){
+        input.value += '-'
+      }
+
+    })
+  })
+

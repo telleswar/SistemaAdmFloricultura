@@ -30,7 +30,7 @@
                       <div class="form-group row">
                         <label for="cpf" class="col-4 col-form-label">CPF</label>
                         <div class="col-8">
-                          <input id="cpf" name="cpf" type="text" class="form-control @error('cpf') is-invalid @enderror" value="{{$cliente->cpf}}" required>
+                          <input id="cpf" name="cpf" type="text" class="form-control cpf @error('cpf') is-invalid @enderror" value="{{$cliente->cpf}}" required maxlength="14">
                           @error('cpf')
                             <div class="invalid-feedback">{{ $message }}</div>
                           @enderror
