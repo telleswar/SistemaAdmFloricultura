@@ -21,7 +21,7 @@
             </div>  
         @endif
 
-        <div class="row text-center justify-center">
+        <div class="row text-center text-left">
             <form class="g-3 needs-validation" method="POST" action="{{ route('auth.store') }}" novalidate>
                 @csrf
 
