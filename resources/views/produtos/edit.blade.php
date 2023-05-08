@@ -21,7 +21,7 @@
                     <div class="form-group row">
                         <label for="nome" class="col-4 col-form-label">Nome</label>
                         <div class="col-8">
-                          <input id="nome" name="nome" type="text" class="form-control @error('nome') is-invalid @enderror" value="{{$produto->nome}}">
+                          <input id="nome" name="nome" type="text" class="form-control @error('nome') is-invalid @enderror" value="{{$produto->nome}}" required>
                         
                           @error('nome')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -32,7 +32,7 @@
                       <div class="form-group row">
                         <label for="tipo" class="col-4 col-form-label" >Tipo</label>
                         <div class="col-8">
-                          <input id="tipo" name="tipo" type="text" class="form-control @error('tipo') is-invalid @enderror" value="{{$produto->tipo}}">
+                          <input id="tipo" name="tipo" type="text" class="form-control @error('tipo') is-invalid @enderror" value="{{$produto->tipo}}" required>
                           @error('tipo')
                             <div class="invalid-feedback">{{ $message }}</div>
                           @enderror

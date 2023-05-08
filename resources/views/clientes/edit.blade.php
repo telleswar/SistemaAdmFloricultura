@@ -20,7 +20,7 @@
                     <div class="form-group row">
                         <label for="nome" class="col-4 col-form-label">Nome</label>
                         <div class="col-8">
-                          <input id="nome" name="nome" type="text" class="form-control @error('nome') is-invalid @enderror" value="{{$cliente->nome}}">
+                          <input id="nome" name="nome" type="text" class="form-control @error('nome') is-invalid @enderror" value="{{$cliente->nome}}" required>
                           @error('nome')
                             <div class="invalid-feedback">{{ $message }}</div>
                           @enderror
@@ -30,7 +30,7 @@
                       <div class="form-group row">
                         <label for="cpf" class="col-4 col-form-label">CPF</label>
                         <div class="col-8">
-                          <input id="cpf" name="cpf" type="text" class="form-control @error('cpf') is-invalid @enderror" value="{{$cliente->cpf}}">
+                          <input id="cpf" name="cpf" type="text" class="form-control @error('cpf') is-invalid @enderror" value="{{$cliente->cpf}}" required>
                           @error('cpf')
                             <div class="invalid-feedback">{{ $message }}</div>
                           @enderror
@@ -40,7 +40,7 @@
                       <div class="form-group row">
                         <label for="email" class="col-4 col-form-label" >E-mail</label>
                         <div class="col-8">
-                          <input id="email" name="email" type="text" class="form-control @error('email') is-invalid @enderror" value="{{$cliente->email}}">
+                          <input id="email" name="email" type="text" class="form-control @error('email') is-invalid @enderror" value="{{$cliente->email}}" required>
                           @error('email')
                             <div class="invalid-feedback">{{ $message }}</div>
                           @enderror
@@ -50,7 +50,7 @@
                       <div class="form-group row">
                         <label for="telefone" class="col-4 col-form-label" >Telefone</label>
                         <div class="col-8">
-                          <input id="telefone" name="telefone" type="text" class="form-control @error('telefone') is-invalid @enderror" value="{{$cliente->telefone}}">
+                          <input id="telefone" name="telefone" type="text" class="form-control @error('telefone') is-invalid @enderror" value="{{$cliente->telefone}}" required>
                           @error('telefone')
                             <div class="invalid-feedback">{{ $message }}</div>
                           @enderror
@@ -60,7 +60,7 @@
                       <div class="form-group row">
                         <label for="endereco" class="col-4 col-form-label">Endereço</label>
                         <div class="col-8">
-                          <input id="endereco" name="endereco" type="text" class="form-control @error('endereco') is-invalid @enderror" value="{{$cliente->endereco}}">
+                          <input id="endereco" name="endereco" type="text" class="form-control @error('endereco') is-invalid @enderror" value="{{$cliente->endereco}}" required>
                           @error('endereco')
                             <div class="invalid-feedback">{{ $message }}</div>
                           @enderror

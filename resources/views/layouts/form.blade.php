@@ -1,7 +1,8 @@
 {{-- @extends('layouts.base') --}}
 
 @section('scripts')
-    <script type="text/javascript">
+  @vite(['resources/js/forms.js'])
+    {{-- <script type="text/javascript">
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function () {
             'use strict'
@@ -23,5 +24,5 @@
               })
           })()
 
-        </script>
+        </script> --}}
 @endsection
