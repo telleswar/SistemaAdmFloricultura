@@ -31,21 +31,6 @@
 //     el: '#app',
 // });
 
-function enviar(){
-    console.log('Passou aqui');
-    for ( var i = 0; i < currencyInput.length; i++ ) {
-        var value = e.target.value;
-        e.target.value = value ? localStringToNumber( value ) : '0';   
-    }
-}
-
-window.onload=function(){
-    var submit = document.getElementById("submit");
-
-    submit.onclick = function () {
-        enviar();
-    };
-}
 
 var alert_del = document.querySelectorAll('.alert-del');
   alert_del.forEach((x) =>
@@ -69,7 +54,8 @@ for ( var i = 0; i < currencyInput.length; i++ ) {
     currencyInput[ i ].addEventListener( 'blur', onBlur )
 
     function localStringToNumber( s ) {
-        return Number( String( s ).replace( /[^0-9.-]+/g, "" ) )
+        s = String( s ).replace("R$ ", "" );
+        return ( String (s) );
     }
 
     function onFocus( e ) {
@@ -88,7 +74,7 @@ for ( var i = 0; i < currencyInput.length; i++ ) {
         }
 
         e.target.value = ( value || value === 0 ) ?
-            localStringToNumber( value ).toLocaleString( undefined, options ) :
+            "R$ " + value:
             ''
     }
 }

@@ -9,6 +9,33 @@ use Illuminate\Http\Request;
 class ProdutoController extends Controller
 {
 
+    private function convertToValidPrice($price) {
+        $price = str_replace(',', '.', $price);
+        $price = trim(str_replace(['-', ',', '$','R', ' ', ' '], '', $price));
+        $price = trim($price);
+        
+
+        if(strpos($price, '.') !== false) {
+            $dollarExplode = explode('.', $price);
+            $dollar = $dollarExplode[0];
+            $cents = $dollarExplode[1];
+            if(strlen($cents) === 0) {
+                $cents = '00';
+            } elseif(strlen($cents) === 1) {
+                $cents = $cents.'0';
+            } elseif(strlen($cents) > 2) {
+                $cents = substr($cents, 0, 2);
+            }
+            $price = $dollar.'.'.$cents;
+        } else {
+            $cents = '00';
+            $price = $price.'.'.$cents;
+        }
+        
+
+        return $price;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -40,19 +67,19 @@ class ProdutoController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
-            'nome' => ['required','string','min:5','max:120'],
-            'tipo' => ['required','string','min:5','max:120'],
-            'preco_unitario' => ['required','decimal:2'],
-            'custo' => ['required','decimal:2'],
-        ]);
+        // dd($this->convertToValidPrice($request->preco_unitario));
+
+        // $request->validate([
+        //     'nome' => ['required','string','min:5','max:120'],
+        //     'tipo' => ['required','string','min:5','max:120'],
+        // ]);
 
         $produto = new Produto();
 
         $produto->nome = $request->nome;
         $produto->tipo = $request->tipo;        
-        $produto->preco_unitario = $request->preco_unitario;          
-        $produto->custo = $request->custo;
+        $produto->preco_unitario = (float) $this->convertToValidPrice($request->preco_unitario);          
+        $produto->custo = (float) $this->convertToValidPrice($request->custo);
         $produto->descricao = $request->descricao;
         $produto->estoque = 0;
         $produto->id_fornecedor = 1;
@@ -93,17 +120,17 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, Produto $produto)
     {
+
+        
         $request->validate([
             'nome' => ['required','string','min:5','max:120'],
             'tipo' => ['required','string','min:5','max:120'],
-            'preco_unitario' => ['required','decimal:2'],
-            'custo' => ['required','decimal:2'],
         ]);
 
         $produto->nome = $request->nome;
         $produto->tipo = $request->tipo;        
-        $produto->preco_unitario = $request->preco_unitario;          
-        $produto->custo = $request->custo;
+        $produto->preco_unitario = (float) $this->convertToValidPrice($request->preco_unitario);          
+        $produto->custo = (float) $this->convertToValidPrice($request->custo);
         $produto->descricao = $request->descricao;
         $produto->estoque = 0;
         $produto->id_fornecedor = 1;

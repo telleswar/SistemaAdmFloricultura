@@ -8,7 +8,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
             </div>
             <div class="modal-body">
-                <form class="g-3 needs-validation" method="POST" action="{{ route('produtos.store') }}" novalidate>
+                <form class="g-3 needs-validation" method="POST" action="{{ route('produtos.update',['produto' => $produto->id]) }}" novalidate>
                     @csrf
 
                     <div class="form-group row">
@@ -21,7 +21,7 @@
                     <div class="form-group row">
                         <label for="nome" class="col-4 col-form-label">Nome</label>
                         <div class="col-8">
-                          <input id="nome" name="nome" type="text" class="form-control @error('nome') is-invalid @enderror">
+                          <input id="nome" name="nome" type="text" class="form-control @error('nome') is-invalid @enderror" value="{{$produto->nome}}">
                         
                           @error('nome')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -32,7 +32,7 @@
                       <div class="form-group row">
                         <label for="tipo" class="col-4 col-form-label" >Tipo</label>
                         <div class="col-8">
-                          <input id="tipo" name="tipo" type="text" class="form-control @error('tipo') is-invalid @enderror">
+                          <input id="tipo" name="tipo" type="text" class="form-control @error('tipo') is-invalid @enderror" value="{{$produto->tipo}}">
                           @error('tipo')
                             <div class="invalid-feedback">{{ $message }}</div>
                           @enderror
@@ -42,7 +42,7 @@
                       <div class="form-group row">
                         <label for="custo" class="col-4 col-form-label" >Custo</label>    
                         <div class="col-8">
-                          <input class="form-control @error('custo') is-invalid @enderror" type="currency" name="custo" id="custo" value="0.00">
+                          <input class="form-control @error('custo') is-invalid @enderror" type="currency" name="custo" id="custo" value="{{$produto->custo}}">
                           @error('custo')
                             <div class="invalid-feedback">{{ $message }}</div>
                           @enderror
@@ -52,7 +52,7 @@
                       <div class="form-group row">
                         <label for="preco_unitario" class="col-4 col-form-label" >Preço unitário</label>    
                         <div class="col-8">
-                          <input class="form-control @error('preco_unitario') is-invalid @enderror" type="currency" name="preco_unitario" id="preco_unitario" value="0.00">
+                          <input class="form-control @error('preco_unitario') is-invalid @enderror" type="currency" name="preco_unitario" id="preco_unitario" value="{{$produto->preco_unitario}}">
                           @error('preco_unitario')
                             <div class="invalid-feedback">{{ $message }}</div>
                           @enderror
@@ -62,7 +62,7 @@
                       <div class="form-group row">
                         <label for="descricao" class="col-4 col-form-label">Descrição</label>
                         <div class="col-8">
-                          <textarea id="descricao" name="descricao" class="form-control"></textarea>
+                          <textarea id="descricao" name="descricao" class="form-control">{{$produto->descricao}}</textarea>
                         </div>
                       </div>
 

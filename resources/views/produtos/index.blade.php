@@ -40,8 +40,8 @@
                         </div>
                         <div class="card-body">
                             <p class="card-text"><ion-icon name="bookmark-outline"></ion-icon>Tipo: {{$produto->tipo}}</p>
-                            <p class="card-text"><ion-icon name="pricetag-outline"></ion-icon>Custo: {{$produto->custo}}</p>
-                            <p class="card-text"><ion-icon name="pricetags-outline"></ion-icon>Preço unitário: {{$produto->preco_unitario}}</p>
+                            <p class="card-text"><ion-icon name="pricetag-outline"></ion-icon>Custo: R${{number_format((float) $produto->custo, 2)}}</p>
+                            <p class="card-text"><ion-icon name="pricetags-outline"></ion-icon>Preço unitário: R${{number_format((float) $produto->preco_unitario, 2)}}</p>
                             <p class="card-text"><ion-icon name="cube-outline"></ion-icon>Estoque: {{$produto->estoque}}</p>
                             <p class="card-text"><ion-icon name="chatbox-outline"></ion-icon>Descrição: {{$produto->descricao}}</p>
                         </div>

@@ -15,6 +15,7 @@ label {
 select,
 option,
 input,
+textarea,
 #nome_home,
 .dropdown-item,
 .nav-link {
@@ -186,8 +187,6 @@ tbody,
 }
 
 /* Produtos */
-
-/* Clientes */
 
 .btn-add{
     display: flex;
