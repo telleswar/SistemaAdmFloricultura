@@ -68,7 +68,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('auth.edit')}}">Alterar senha</a>
+                                    {{-- <a class="dropdown-item" href="{{ route('auth.edit')}}">Alterar senha</a> --}}
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -94,7 +94,11 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">Estoque</a>
+                <a class="nav-link" href="{{Route('movs_estoque.index')}}">Estoque</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{Route('fornecedores.index')}}">Fornecedor</a>
             </li>
 
             <li class="nav-item">

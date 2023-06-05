@@ -20,10 +20,9 @@
   })()
 
 
-var inputs = document.querySelectorAll(".cpf");
+var inputs_cpf = document.querySelectorAll(".cpf");
 
-// Loop over them and prevent submission
-Array.prototype.slice.call(inputs)
+Array.prototype.slice.call(inputs_cpf)
   .forEach(function (input) {
     input.addEventListener('keypress',()=>{
     
@@ -32,6 +31,26 @@ Array.prototype.slice.call(inputs)
       if(len === 3 || len === 7) {
         input.value += '.'
       }else if(len === 11){
+        input.value += '-'
+      }
+
+    })
+  })
+
+
+var inputs_cnpj = document.querySelectorAll(".cnpj");
+
+Array.prototype.slice.call(inputs_cnpj)
+  .forEach(function (input) {
+    input.addEventListener('keypress',()=>{
+    
+      let len = input.value.length
+
+      if(len === 2 || len === 6) {
+        input.value += '.'
+      }else if (len === 10){
+        input.value += '/'
+      }else if(len === 15){
         input.value += '-'
       }
 

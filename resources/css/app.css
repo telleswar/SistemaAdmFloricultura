@@ -186,6 +186,58 @@ tbody,
     margin-left: 2%;
 }
 
+/* Fornecedores */
+
+.btn-add{
+    display: flex;
+    margin-left: 10px;
+}
+.btn-add ion-icon{
+    margin-right: 5px;
+}
+
+#lista-fornecedores .card-header h2{
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+    color: white;
+    margin: 0;
+}
+
+#lista-fornecedores .card-header ion-icon{
+    color: white;
+    font-size: 20px !important;
+    margin-right: 5px;
+}
+
+#lista-fornecedores .card-text ion-icon{
+    font-size: 24px;
+    color: #d57891;
+    margin-right: 5px;
+}
+
+#lista-fornecedores .card-text{
+    color: white;
+    margin: 0;
+    font-size: 16px;
+    display: flex;
+}
+
+#lista-fornecedores .card {
+    min-width: 280px;
+    max-width: 280px;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+#lista-fornecedores .card-text{
+    text-align: left;
+}
+
+#lista-fornecedores .btn-add{
+    margin-left: 2%;
+}
+
 /* Produtos */
 
 .btn-add{

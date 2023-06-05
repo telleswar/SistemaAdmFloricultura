@@ -4,11 +4,11 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Cadastro de cliente</h3>
+                <h3 class="modal-title">Cadastro de fornecedor</h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
             </div>
             <div class="modal-body">
-                <form class="g-3 needs-validation" method="POST" action="{{ route('clientes.store') }}" novalidate>
+                <form class="g-3 needs-validation" method="POST" action="{{ route('fornecedores.store') }}" novalidate>
                     @csrf
                     <div class="form-group row">
                         <label for="nome" class="col-4 col-form-label">Nome</label>
@@ -22,10 +22,10 @@
                       </div>
 
                       <div class="form-group row">
-                        <label for="cpf" class="col-4 col-form-label">CPF</label>
+                        <label for="cnpj" class="col-4 col-form-label">CNPJ</label>
                         <div class="col-8">
-                          <input id="cpf" name="cpf" type="text" class="form-control cpf @error('cpf') is-invalid @enderror" required maxlength="14">
-                          @error('cpf')
+                          <input id="cnpj" name="cnpj" type="text" class="form-control cnpj @error('cnpj') is-invalid @enderror" required maxlength="18">
+                          @error('cnpj')
                             <div class="invalid-feedback">{{ $message }}</div>
                           @enderror
                         </div>
