@@ -10,7 +10,7 @@ class ClientTest extends TestCase
     /** @test*/
     public function verificar_cliente_colunas_banco()
     {
-        $fornecedor = new Cliente;
+        $cliente = new Cliente;
         
         $esperado = [
             'id',

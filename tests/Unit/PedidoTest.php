@@ -3,14 +3,14 @@
 namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use App\Models\Mov_Estoque;
+use App\Models\Pedido;
 
 class PedidoTest extends TestCase
 {
     /** @test*/
     public function verificar_pedido_colunas_banco()
     {
-        $Pedido = new Pedido;
+        $pedido = new Pedido;
         
         $esperado = [
             'numero',
@@ -19,7 +19,7 @@ class PedidoTest extends TestCase
             'data_entrega'
         ];
 
-        $arrayComp = array_diff($esperado, $Pedido->getFillable());
+        $arrayComp = array_diff($esperado, $pedido->getFillable());
 
         $this->assertEquals(0, count($arrayComp));
 
