@@ -16,6 +16,7 @@ class ClientTest extends TestCase
             'id',
             'nome',
             'telefone',
+            'celular',
             'email',
             'endereco',
             'cpf',
@@ -23,6 +24,8 @@ class ClientTest extends TestCase
         ];
 
         $arrayComp = array_diff($esperado, $cliente->getFillable());
+
+        dd($arrayComp);
 
         $this->assertEquals(0, count($arrayComp));
 

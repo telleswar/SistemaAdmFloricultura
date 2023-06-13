@@ -107,7 +107,10 @@ class MovEstoqueController extends Controller
      */
     public function destroy(Mov_Estoque $mov_Estoque)
     {
+        $produto = Produto::find($mov_Estoque->id_produto);
+        $produto->estoque = $produto->estoque - $mov_Estoque->quantidade;
         $mov_Estoque->delete();
+        $produto->save();
         return redirect(Route('movs_estoque.index'))->with('sucess','Lançamento de estoque deletado com sucesso!');
     }
 }
