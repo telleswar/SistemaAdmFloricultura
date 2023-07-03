@@ -71,10 +71,11 @@
                     <td class="px-6 py-2 whitespace-nowrap">
                         {{ $movimento->data }}
                     </td>
+                    @include('movs_estoque.delete')
                     <td class="px-6 py-2 whitespace-nowrap">
-                        <a href="{{ Route('movs_estoque.destroy',['mov_Estoque' => $movimento->id])}}"><button class="btn btn-danger">
+                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-{{$movimento->id}}">
                             <ion-icon name="trash-outline" title="Excluir"></ion-icon>
-                        </button></a>
+                        </button>
                     </td>
                 </tr>
                 @empty

@@ -20,6 +20,7 @@ class MovFinanceiraController extends Controller
         $Clientes = Cliente::All();
         $Fornecedores = Fornecedor::All();
 
+
         return view('movs_financeira.index',compact(['Movs_financeira','Clientes','Fornecedores']));
     }
 
@@ -39,9 +40,44 @@ class MovFinanceiraController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store_receita(Request $request)
     {
-        //
+        $request->validate([
+            'id_cliente' => ['required'],
+            'data_limite' => ['date','required'],
+            'data_pagto' => ['date','required'],
+        ]);
+
+        $mov = new Mov_Financeira;
+
+        $mov->id_cliente = $request->id_cliente;
+        $mov->valor = (float) $this->convertToValidPrice($request->valor);
+        $mov->tipo = "REC";
+        $mov->data_limite = $request->data_limite;
+        $mov->data_pagto = $request->data_pagto; 
+        
+        $mov->save();
+        return redirect( Route('movs_financeira.index') )->with('sucess','Novo lançamento financeiro cadastrado com sucesso!');
+    }
+
+    public function store_despesa(Request $request)
+    {
+        $request->validate([
+            'id_fornecedor' => ['required'],
+            'data_limite' => ['date','required'],
+            'data_pagto' => ['date','required'],
+        ]);
+
+        $mov = new Mov_Financeira;
+
+        $mov->id_fornecedor = $request->id_fornecedor;
+        $mov->valor = (float) $this->convertToValidPrice($request->valor);
+        $mov->tipo = "DESP";
+        $mov->data_limite = $request->data_limite;
+        $mov->data_pagto = $request->data_pagto; 
+        
+        $mov->save();
+        return redirect( Route('movs_financeira.index') )->with('sucess','Novo lançamento financeiro cadastrado com sucesso!');
     }
 
     /**
@@ -86,6 +122,33 @@ class MovFinanceiraController extends Controller
      */
     public function destroy(Mov_Financeira $mov_Financeira)
     {
-        //
+        $mov_Financeira->delete();
+        return redirect(Route('movs_financeira.index'))->with('sucess','Lançamento financeiro deletado com sucesso!');
+    }
+
+    private function convertToValidPrice($price) {
+        $price = str_replace(',', '.', $price);
+        $price = trim(str_replace(['-', ',', '$','R', ' ', ' '], '', $price));
+        $price = trim($price);
+
+        if(strpos($price, '.') !== false) {
+            $dollarExplode = explode('.', $price);
+            $dollar = $dollarExplode[0];
+            $cents = $dollarExplode[1];
+            if(strlen($cents) === 0) {
+                $cents = '00';
+            } elseif(strlen($cents) === 1) {
+                $cents = $cents.'0';
+            } elseif(strlen($cents) > 2) {
+                $cents = substr($cents, 0, 2);
+            }
+            $price = $dollar.'.'.$cents;
+        } else {
+            $cents = '00';
+            $price = $price.'.'.$cents;
+        }
+        
+
+        return $price;
     }
 }

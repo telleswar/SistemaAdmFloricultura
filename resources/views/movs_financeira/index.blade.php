@@ -67,10 +67,11 @@
                     <td class="px-6 py-2 whitespace-nowrap ">
                         R${{number_format((float) $movimento->valor , 2)}}
                     </td>
+                    @include('movs_financeira.delete')
                     <td class="px-6 py-2 whitespace-nowrap">
-                        <a href="{{ Route('movs_financeira.destroy',['mov_Financeira' => $movimento->id])}}"><button class="btn btn-danger">
+                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-{{$movimento->id}}">
                             <ion-icon name="trash-outline" title="Excluir"></ion-icon>
-                        </button></a>
+                        </button>
                     </td>
                 </tr>
                 @empty

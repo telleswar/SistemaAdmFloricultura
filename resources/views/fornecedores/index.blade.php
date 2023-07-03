@@ -50,10 +50,10 @@
                             <button class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#editar-{{$fornecedor->id}}">
                                 <ion-icon name="pencil-outline" title="Editar"></ion-icon>
                             </button>
-                            
-                            <a href="{{ Route('fornecedores.destroy',['fornecedor' => $fornecedor->id])}}"><button class="btn btn-danger">
+                            @include('fornecedores.delete')
+                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-{{$fornecedor->id}}">
                                 <ion-icon name="trash-outline" title="Excluir"></ion-icon>
-                            </button></a>
+                            </button>
                         </div>
                     </div>
                 </div>
