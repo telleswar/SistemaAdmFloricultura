@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05/06/2023 às 21:38
+-- Tempo de geração: 04/07/2023 às 00:59
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -35,7 +35,7 @@ CREATE TABLE `cliente` (
   `endereco` varchar(120) DEFAULT NULL,
   `cpf` varchar(14) DEFAULT NULL,
   `cnpj` varchar(14) DEFAULT NULL
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `cliente`
@@ -43,9 +43,8 @@ CREATE TABLE `cliente` (
 
 INSERT INTO `cliente` (`id`, `nome`, `telefone`, `email`, `endereco`, `cpf`, `cnpj`) VALUES
 (1, 'Leandro', '(47)91234-1234', 'leandro@gmail.com', 'Rua teste, 123', '10347124976', '10344433377123'),
-(2, 'Antony Rairon da Silva Moreira', '(47)91234-1234', 'antony@gmail.com', 'Rua teste, 123', '10347124976', ''),
-(17, 'Teste22', '(47)99762-2050', 'adm@gmail.com', 'Rua teste', '10347124976', NULL),
-(18, 'Teste22', '(47)99762-2050', 'silva12341@gmail.com', 'Rua teste', '103.471.249-76', NULL);
+(2, 'Antony Rairon', '(47)91234-1234', 'antony@gmail.com', 'Rua teste, 123', '103.471.249-76', ''),
+(17, 'Teste22', '(47)99762-2050', 'adm@gmail.com', 'Rua teste', '10347124976', NULL);
 
 -- --------------------------------------------------------
 
@@ -60,7 +59,7 @@ CREATE TABLE `fornecedor` (
   `email` varchar(120) DEFAULT NULL,
   `endereco` varchar(120) NOT NULL,
   `cnpj` varchar(18) DEFAULT NULL
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `fornecedor`
@@ -68,18 +67,6 @@ CREATE TABLE `fornecedor` (
 
 INSERT INTO `fornecedor` (`id`, `nome`, `telefone`, `email`, `endereco`, `cnpj`) VALUES
 (11, 'Pedro Flores', '(47)91234-1234', 'pedro@flores.com', 'Rua teste', '66.490.523/0001-71'),
-(12, 'Pedro Flores', '(47)91234-1234', 'pedro@flores.com', 'Rua teste', '66.490.523/0001-71'),
-(13, 'Pedro Flores', '(47)91234-1234', 'pedro@flores.com', 'Rua teste', '66.490.523/0001-71'),
-(14, 'Pedro Flores', '(47)91234-1234', 'pedro@flores.com', 'Rua teste', '66.490.523/0001-71'),
-(15, 'Pedro Flores', '(47)91234-1234', 'pedro@flores.com', 'Rua teste', '66.490.523/0001-71'),
-(16, 'Pedro Flores', '(47)91234-1234', 'pedro@flores.com', 'Rua teste', '66.490.523/0001-71'),
-(17, 'Lucas Flores', '(47)99762-2050', 'lucas@flores.com', 'Rua teste', '99.581.213/0001-11'),
-(18, 'Pedro Flores', '(47)91234-1234', 'pedro@flores.com', 'Rua teste', '66.490.523/0001-71'),
-(19, 'Pedro Flores', '(47)91234-1234', 'pedro@flores.com', 'Rua teste', '66.490.523/0001-71'),
-(20, 'Pedro Flores', '(47)91234-1234', 'pedro@flores.com', 'Rua teste', '66.490.523/0001-71'),
-(21, 'Pedro Flores', '(47)91234-1234', 'pedro@flores.com', 'Rua teste', '66.490.523/0001-71'),
-(22, 'Pedro Flores', '(47)91234-1234', 'pedro@flores.com', 'Rua teste', '66.490.523/0001-71'),
-(23, 'Pedro Flores', '(47)91234-1234', 'pedro@flores.com', 'Rua teste', '66.490.523/0001-71'),
 (24, 'Lucas Flores', '(47)99762-2050', 'lucas@flores.com', 'Rua teste', '99.581.213/0001-11');
 
 -- --------------------------------------------------------
@@ -89,18 +76,22 @@ INSERT INTO `fornecedor` (`id`, `nome`, `telefone`, `email`, `endereco`, `cnpj`)
 --
 
 CREATE TABLE `itens_pedido` (
-  `numero_pedido` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `id_pedido` int(11) NOT NULL,
   `id_produto` int(11) NOT NULL,
   `quantidade` int(11) DEFAULT 1,
   `valor` float DEFAULT NULL
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `itens_pedido`
 --
 
-INSERT INTO `itens_pedido` (`numero_pedido`, `id_produto`, `quantidade`, `valor`) VALUES
-(1, 1, 2, 5);
+INSERT INTO `itens_pedido` (`id`, `id_pedido`, `id_produto`, `quantidade`, `valor`) VALUES
+(1, 1, 1, 2, 5),
+(6, 13, 5, 1, 2),
+(7, 14, 2, 3, 33333),
+(8, 11, 2, 3, 33333);
 
 -- --------------------------------------------------------
 
@@ -114,7 +105,21 @@ CREATE TABLE `mov_estoque` (
   `id_produto` int(11) NOT NULL,
   `quantidade` int(11) DEFAULT 0,
   `data` date DEFAULT current_timestamp()
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `mov_estoque`
+--
+
+INSERT INTO `mov_estoque` (`id`, `id_fornecedor`, `id_produto`, `quantidade`, `data`) VALUES
+(31, 11, 1, 1, '2001-10-05'),
+(32, 11, 1, 1, '2023-10-01'),
+(33, 11, 1, 1, '2023-06-06'),
+(34, 11, 1, 1, '2023-06-06'),
+(35, 11, 1, 1, '2023-01-01'),
+(36, 11, 1, 1, '2023-01-01'),
+(37, 11, 1, 1, '2023-01-01'),
+(38, 11, 1, 1, '2023-01-01');
 
 -- --------------------------------------------------------
 
@@ -123,14 +128,14 @@ CREATE TABLE `mov_estoque` (
 --
 
 CREATE TABLE `mov_financeira` (
-  `codigo` int(11) NOT NULL,
-  `id_fornecedor` int(11) NOT NULL,
-  `id_cliente` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `id_fornecedor` int(11) DEFAULT NULL,
+  `id_cliente` int(11) DEFAULT NULL,
   `valor` float DEFAULT NULL,
   `tipo` varchar(15) DEFAULT NULL,
   `data_limite` datetime DEFAULT NULL,
   `data_pagto` datetime DEFAULT NULL
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -139,25 +144,22 @@ CREATE TABLE `mov_financeira` (
 --
 
 CREATE TABLE `pedido` (
-  `numero` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `valor_total` float DEFAULT NULL,
   `data_criacao` datetime DEFAULT NULL,
   `data_entrega` datetime DEFAULT NULL,
   `id_cliente` int(11) NOT NULL
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `pedido`
 --
 
-INSERT INTO `pedido` (`numero`, `valor_total`, `data_criacao`, `data_entrega`, `id_cliente`) VALUES
+INSERT INTO `pedido` (`id`, `valor_total`, `data_criacao`, `data_entrega`, `id_cliente`) VALUES
 (1, 5, '2023-03-06 00:40:33', '2023-03-06 00:40:33', 1),
-(2, 10, '2023-03-06 13:30:42', '2023-03-06 13:30:42', 2),
-(3, 11, '2023-03-06 13:30:42', '2023-03-06 13:30:42', 1),
-(4, 10, '2023-03-06 13:30:42', '2023-03-06 13:30:42', 1),
-(5, 11, '2023-03-06 13:30:42', '2023-03-06 13:30:42', 1),
-(6, 55, '2023-05-07 16:40:01', '2023-05-08 16:40:01', 2),
-(7, 77, '2023-05-07 16:40:01', '2023-05-08 16:40:01', 1);
+(11, 33333, '2023-07-03 21:36:51', '2023-06-02 00:00:00', 2),
+(13, 2, '2023-07-03 22:11:22', '2023-06-06 00:00:00', 1),
+(14, 33333, '2023-07-03 22:19:38', '2023-06-02 00:00:00', 2);
 
 -- --------------------------------------------------------
 
@@ -175,29 +177,21 @@ CREATE TABLE `produto` (
   `estoque` int(11) DEFAULT 0,
   `id_fornecedor` int(11) DEFAULT NULL,
   `imagem` varchar(255) DEFAULT NULL
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `produto`
 --
 
 INSERT INTO `produto` (`id`, `nome`, `custo`, `tipo`, `descricao`, `preco_unitario`, `estoque`, `id_fornecedor`, `imagem`) VALUES
-(1, 'Girassol', 1.5, 'Flor', 0x68747470733a2f2f6769746875622e636f6d2f74656c6c65737761722f494653432d446973706f73697469766f732d4d6f766569732f747265652f72656379636c657276696577, 2.5, 23, NULL, ''),
-(2, 'Flor2', 555.77, 'ADDASDASDasdasd', 0x746573746531, 11111, 56, NULL, 'c8b2cbe19404633e0156e10b1e4a4780.webp'),
-(5, 'adsads', 1, 'adsads', NULL, 2, 0, NULL, '352052366be90817e10afd16a55bfdf5.jpg'),
-(6, 'adsads', 1, 'adsads', NULL, 2, 0, NULL, '28f1b6c0af3754420868c8d13035362c.jpg'),
-(7, 'adsads', 1, 'adsads', NULL, 2, 0, NULL, '76b4d6d26e99bd7f8028069f2b328189.webp'),
-(8, 'adsads', 1, 'adsads', NULL, 2, 0, NULL, NULL),
-(9, 'adsads', 1, 'adsads', NULL, 2, 0, NULL, NULL),
-(10, 'adsads', 1, 'adsads', NULL, 2, 0, NULL, NULL),
-(11, 'adsads', 1, 'adsads', NULL, 2, 0, NULL, NULL),
-(12, 'adsads', 1, 'adsads', NULL, 2, 0, NULL, NULL),
-(13, 'Teste', 15.88, 'Flor2', NULL, 0.99, 0, NULL, NULL),
-(14, 'Teste22', 0, 'Flor2', 0x7465737465, 0, 0, NULL, NULL),
-(15, 'Teste22', 0, 'Flor2', 0x61, 0, 0, NULL, NULL),
-(16, 'Teste1', 11.66, '0.00', NULL, 0, 0, NULL, NULL),
-(18, 'Teste1', 1555.77, 'Flor2', NULL, 0, 0, NULL, NULL),
-(19, 'Teste22', 0, 'Flor2222', 0x446573637269c3a7c3a36f, 0, 0, NULL, ''),
+(1, 'Girassol', 1.5, 'flor', 0x556d6120666c6f72206c696e6461, 2.5, 31, NULL, ''),
+(2, 'Flor2', 555.77, 'flor', 0x746573746531, 11111, 80, NULL, ''),
+(5, 'Flor3', 1, 'flor', NULL, 2, -1, NULL, ''),
+(6, 'Flor4', 1, 'flor', NULL, 2, 0, NULL, ''),
+(7, 'Flor 5', 1, 'flor', NULL, 2, 0, NULL, ''),
+(15, 'Flor 6', 0, 'flor', 0x61, 0, 0, NULL, ''),
+(16, 'Flor 7', 11.66, 'flor', NULL, 0, 0, NULL, ''),
+(19, 'Teste22', 0, 'Flor 8', 0x446573637269c3a7c3a36f, 0, 0, NULL, ''),
 (20, 'Teste22', 0, 'Flor2', 0x5465737465, 0, 0, NULL, '7e9303915d3db9fc71534dc9197708bc.jpg'),
 (21, 'Teste22', 0, 'Flor2', NULL, 0, 0, NULL, '');
 
@@ -216,14 +210,14 @@ CREATE TABLE `users` (
   `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(13, 'Administrador', 'adm@gmail.com', NULL, '$2y$10$jEXUXfi06kGK1sYdisZQnOBRNFq8M91VVajkMC1gLE/jgi6BLJFdm', '6lm1GP7IshNNyldeAgxLwvodKtA2AK7jLxeGL7sXGXtb7G9dJ6dQ2PxjIUzp', '2023-03-06 02:25:31', '2023-05-08 18:44:28'),
+(13, 'Administrador', 'adm@gmail.com', NULL, '$2y$10$jEXUXfi06kGK1sYdisZQnOBRNFq8M91VVajkMC1gLE/jgi6BLJFdm', 'MjauMQ0KB7U3MaO7sgKxHfOfvapB6tbBuA0JCTL1Z6PhK6WwezfjX0EbxrYo', '2023-03-06 02:25:31', '2023-05-08 18:44:28'),
 (14, 'teste', 'teste@teste', NULL, '$2y$10$gTd6tKXw6S3YNbr6AMHMKu3mz9/hYEYxhkJB4DluxVq2YU42qIt8O', NULL, '2023-05-08 01:20:25', '2023-05-08 01:20:25');
 
 --
@@ -246,7 +240,8 @@ ALTER TABLE `fornecedor`
 -- Índices de tabela `itens_pedido`
 --
 ALTER TABLE `itens_pedido`
-  ADD KEY `numero_pedido` (`numero_pedido`),
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `numero_pedido` (`id_pedido`),
   ADD KEY `id_produto` (`id_produto`);
 
 --
@@ -261,7 +256,7 @@ ALTER TABLE `mov_estoque`
 -- Índices de tabela `mov_financeira`
 --
 ALTER TABLE `mov_financeira`
-  ADD PRIMARY KEY (`codigo`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `id_fornecedor` (`id_fornecedor`),
   ADD KEY `id_cliente` (`id_cliente`);
 
@@ -269,7 +264,7 @@ ALTER TABLE `mov_financeira`
 -- Índices de tabela `pedido`
 --
 ALTER TABLE `pedido`
-  ADD PRIMARY KEY (`numero`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `id_cliente` (`id_cliente`);
 
 --
@@ -300,25 +295,31 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de tabela `fornecedor`
 --
 ALTER TABLE `fornecedor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT de tabela `itens_pedido`
+--
+ALTER TABLE `itens_pedido`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `mov_estoque`
 --
 ALTER TABLE `mov_estoque`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT de tabela `mov_financeira`
 --
 ALTER TABLE `mov_financeira`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `numero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de tabela `produto`
@@ -340,7 +341,7 @@ ALTER TABLE `users`
 -- Restrições para tabelas `itens_pedido`
 --
 ALTER TABLE `itens_pedido`
-  ADD CONSTRAINT `itens_pedido_ibfk_1` FOREIGN KEY (`numero_pedido`) REFERENCES `pedido` (`numero`),
+  ADD CONSTRAINT `itens_pedido_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id`),
   ADD CONSTRAINT `itens_pedido_ibfk_2` FOREIGN KEY (`id_produto`) REFERENCES `produto` (`id`);
 
 --

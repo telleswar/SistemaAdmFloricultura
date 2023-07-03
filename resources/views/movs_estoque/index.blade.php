@@ -69,7 +69,7 @@
                         {{ $movimento->quantidade }}
                     </td>
                     <td class="px-6 py-2 whitespace-nowrap">
-                        {{ $movimento->data }}
+                        {{ \Carbon\Carbon::parse($movimento->data)->format('d/m/Y')}}
                     </td>
                     @include('movs_estoque.delete')
                     <td class="px-6 py-2 whitespace-nowrap">

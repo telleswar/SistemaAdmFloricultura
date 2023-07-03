@@ -57,6 +57,10 @@ Route::get('/financeiro/deletar/{mov_Financeira}',[MovFinanceiraController::clas
 Route::post('/financeiro/receita/salvar',[MovFinanceiraController::class,'store_receita'])->middleware('auth')->name('movs_financeira.store_receita');
 Route::post('/financeiro/despesa/salvar',[MovFinanceiraController::class,'store_despesa'])->middleware('auth')->name('movs_financeira.store_despesa');
 
+//Pedidos
+Route::get('/pedidos/deletar/{pedido}',[PedidoController::class,'destroy'])->middleware('auth')->name('pedidos.destroy');
+Route::post('/pedidos/salvar',[PedidoController::class,'store'])->middleware('auth')->name('pedidos.store');
+Route::post('/pedidos/atualizar/{pedido}',[PedidoController::class,'update'])->middleware('auth')->name('pedidos.update');
 
 
 

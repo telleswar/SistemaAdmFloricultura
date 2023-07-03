@@ -25,5 +25,10 @@ class Pedido extends Model
         return $this->belongsTo(Cliente::class,'id_cliente');
     }
 
+    public function itens_pedido()
+    {
+        return $this->hasMany(Itens_Pedido::class,'id_pedido');
+    }
+
 }
 

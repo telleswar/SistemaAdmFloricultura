@@ -5,10 +5,15 @@
 @endsection
 
 @section('content')
+@include('pedidos.create')
 <div id="lista-pedidos" class="container">
     <div class="row">
         <div class="col-12 mt-5">
-            <h3 class="h3-titulo">Lista de pedidos</h3>
+            <h3 class="h3-titulo">Lista de pedidos
+                <button class="btn btn-success btn-add" data-bs-toggle="modal" data-bs-target="#create">
+                    <ion-icon name="reader-outline"></ion-icon> Novo pedido
+                </button>
+            </h3>
             <hr class="mt-3">
         </div>
 
@@ -24,22 +29,36 @@
             </div>  
         @endif
 
-        <div class="row text-center">
+        <div class="row">
             @foreach ($Pedidos as $pedido)
-                <div class="col-xl-3 col-xs-4 col-lg-4 col-md-6 col-sm-12 col-12 d-flex ms-sm-0 ms-2 align-items-stretch justify-content-center ">
+                <div class="col-xl-3 col-xs-4 col-lg-4 col-md-6 col-sm-12 col-12 d-flex ms-sm-0 ms-2 align-items-stretch justify-content-center text-center">
                     <div class="card bg-dark">                        
                         <div class="card-header">
-                            <h2 class="card-nome-cliente"><ion-icon name="reader-outline"></ion-icon># {{$pedido->numero}} | {{ \Carbon\Carbon::parse($pedido->data_entrega)->format('d/m/Y')}}</p>
+                            <h2 class="card-nome-cliente"><ion-icon name="reader-outline"></ion-icon># {{$pedido->id}} | {{ \Carbon\Carbon::parse($pedido->data_entrega)->format('d/m/Y')}}</p>
                             <h2 class="card-nome-cliente">{{$pedido->cliente->nome}} </h2>
                         </div>
-                        <div class="card-body">
-                            <p class="card-text">Valor total: R$ {{$pedido->valor_total}}</p>
+                        <div class="card-body text-left">
+                            @foreach ($pedido->itens_pedido as $item)
+                                <p class="card-text"><strong>Produto:</strong> {{$item->produto->nome}}
+                                    <br><strong>Quantidade:</strong> {{$item->quantidade}}
+                                    <br><strong>Valor:</strong> R$ {{number_format((float) $item->valor, 2)}}
+                                </p>
+                            @endforeach
+                            <p class="card-text"><strong>Total: R$ {{number_format((float) $pedido->valor_total,2)}}</strong></p>
                         </div>
                         <div class="card-footer">
-                            <a href=""><button class="btn btn-primary">Detalhes</button><br></a>
+                            
+                            <button class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#editar-{{$pedido->id}}">
+                                <ion-icon name="pencil-outline" title="Editar"></ion-icon>
+                            </button>
+                            @include('pedidos.delete')
+                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-{{$pedido->id}}">
+                                <ion-icon name="trash-outline" title="Excluir"></ion-icon>
+                            </button>
                         </div>
                     </div>
                 </div>
+            @include('pedidos.edit')   
             @endforeach
 
             {{$Pedidos->links()}}
