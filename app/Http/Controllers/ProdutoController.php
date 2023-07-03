@@ -140,7 +140,12 @@ class ProdutoController extends Controller
         $produto->preco_unitario = (float) $this->convertToValidPrice($request->preco_unitario);          
         $produto->custo = (float) $this->convertToValidPrice($request->custo);
         $produto->descricao = $request->descricao;
-        $produto->imagem = $this->upload_imagem($request);
+        
+        $imagem = $this->upload_imagem($request);
+        if ($imagem) {
+            $produto->imagem = $imagem;
+        }
+        
 
         $produto->save();
 
