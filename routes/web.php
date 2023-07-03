@@ -8,6 +8,7 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\FornecedorController;
 use App\Http\Controllers\MovEstoqueController;
+use App\Http\Controllers\MovFinanceiraController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,5 +50,13 @@ Route::get('/produtos',[ProdutoController::class,'index'])->middleware('auth')->
 Route::get('/produtos/deletar/{produto}',[ProdutoController::class,'destroy'])->middleware('auth')->name('produtos.destroy');
 Route::post('/produtos/salvar',[ProdutoController::class,'store'])->middleware('auth')->name('produtos.store');
 Route::post('/produtos/atualizar/{produto}',[ProdutoController::class,'update'])->middleware('auth')->name('produtos.update');
+
+//Financeiro
+Route::get('/financeiro',[MovFinanceiraController::class,'index'])->middleware('auth')->name('movs_financeira.index');
+Route::get('/financeiro/deletar/{mov_Financeira}',[MovFinanceiraController::class,'destroy'])->middleware('auth')->name('movs_financeira.destroy');
+Route::post('/financeiro/receita/salvar',[MovFinanceiraController::class,'store_receita'])->middleware('auth')->name('movs_financeira.store_receita');
+Route::post('/financeiro/despesa/salvar',[MovFinanceiraController::class,'store_despesa'])->middleware('auth')->name('movs_financeira.store_despesa');
+
+
 
 

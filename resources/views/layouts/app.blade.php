@@ -99,7 +99,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">Financeiro</a>
+                <a class="nav-link" href="{{Route('movs_financeira.index')}}">Financeiro</a>
             </li>
           </ul>
 

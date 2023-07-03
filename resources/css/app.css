@@ -56,12 +56,15 @@ thead,
 
 .card-body,
 tbody,
-.form-control,
 .form-select,
 .dropdown-menu,
 .submenu,
 .modal-body {
     background: #ff8fad !important;
+}
+
+.form-control{
+    background: #dc748d !important;
 }
 
 #alerta{
