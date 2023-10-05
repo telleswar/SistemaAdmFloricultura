@@ -38,19 +38,58 @@
                             <h2 class="card-nome-cliente">{{$pedido->cliente->nome}} </h2>
                         </div>
                         <div class="card-body text-left">
-                            @foreach ($pedido->itens_pedido as $item)
-                                <p class="card-text"><strong>Produto:</strong> {{$item->produto->nome}}
-                                    <br><strong>Quantidade:</strong> {{$item->quantidade}}
-                                    <br><strong>Valor:</strong> R$ {{number_format((float) $item->valor, 2)}}
-                                </p>
-                            @endforeach
-                            <p class="card-text"><strong>Total: R$ {{number_format((float) $pedido->valor_total,2)}}</strong></p>
+                            @php
+                                $total = 0;
+                            @endphp
+                            @if (count($pedido->itens_pedido) > 0)                             
+                            
+                                <table>
+                                @foreach ($pedido->itens_pedido as $item)
+                                
+                                    <tr>
+                                        <td>
+                                            @if ($item->produto->imagem)
+                                                <img id="imagem-produto" src="img/produtos/{{$item->produto->imagem}}" alt="{{$item->produto->nome}}" class="w-5 h-5 rounded-full">
+                                            @else
+                                                <ion-icon name="bag-outline"></ion-icon>
+                                            @endif
+                                        </td>
+                                        <td class="card-text">{{$item->produto->nome}}</td>
+                                        <td class="card-spacing"></td>
+                                        <td class="card-text">x{{$item->quantidade}}</td>
+                                        <td class="card-spacing"></td>
+                                        <td class="card-text">R$ {{number_format((float) $item->valor, 2)}}</td>
+                                    </tr>
+                                
+                                    @php
+                                        $total += $item->valor;
+                                    @endphp
+                                @endforeach                       
+                                <tr>     
+                                    <td></td>                           
+                                    <td class="card-text">ㅤㅤㅤㅤㅤ</td>
+                                    <td class="card-text">ㅤ</td>
+                                    <td class="card-text"></td>
+                                    <td class="card-text">Total:ㅤ</td>
+                                    <td class="card-text">R$ {{number_format((float) $total, 2)}}</td>
+                                </tr> 
+                                </table>
+                            @else
+                                <p class="card-text">Nenhum produto adicionado...</p>
+                            @endif
+                            
+                            
                         </div>
                         <div class="card-footer">
                             
                             <button class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#editar-{{$pedido->id}}">
                                 <ion-icon name="pencil-outline" title="Editar"></ion-icon>
                             </button>
+                            
+                            <button class="btn btn-success " data-bs-toggle="modal" data-bs-target="#add-{{$pedido->id}}">
+                                <ion-icon name="add-outline" title="Adicionar"></ion-icon>
+                            </button>
+
                             @include('pedidos.delete')
                             <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-{{$pedido->id}}">
                                 <ion-icon name="trash-outline" title="Excluir"></ion-icon>
@@ -59,6 +98,7 @@
                     </div>
                 </div>
             @include('pedidos.edit')   
+            @include('pedidos.add')   
             @endforeach
 
             {{$Pedidos->links()}}

@@ -112,6 +112,11 @@ tbody,
     color: white;
 }
 
+#lista-pedidos .card-spacing  {
+    padding: 0;
+}
+
+
 
 /* Login page */
 #tela-login{
@@ -131,8 +136,8 @@ tbody,
 }
 
 .card {
-    min-width: 280px !important; 
-    max-width: 280px !important;
+    min-width: 480px;
+    max-width: 480px;
     overflow: hidden;
     margin-bottom: 25px;
 }

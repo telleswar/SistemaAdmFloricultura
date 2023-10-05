@@ -61,6 +61,8 @@ Route::post('/financeiro/despesa/salvar',[MovFinanceiraController::class,'store_
 Route::get('/pedidos/deletar/{pedido}',[PedidoController::class,'destroy'])->middleware('auth')->name('pedidos.destroy');
 Route::post('/pedidos/salvar',[PedidoController::class,'store'])->middleware('auth')->name('pedidos.store');
 Route::post('/pedidos/atualizar/{pedido}',[PedidoController::class,'update'])->middleware('auth')->name('pedidos.update');
+Route::post('/pedidos/adicionar/{pedido}',[PedidoController::class,'add'])->middleware('auth')->name('pedidos.add');
+
 
 
 

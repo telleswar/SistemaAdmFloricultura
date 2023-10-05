@@ -30,35 +30,6 @@
                     </div>
 
                     <div class="form-group row">
-                      <label for="id_produto" class="col-3 col-form-label">Produto</label>
-                      <div class="col-9">
-                        <select id="id_produto" name="id_produto" class="form-control @error('id_produto') is-invalid @enderror" required>
-                          @forelse($Produtos as $produto)
-                            <option value="{{ $produto->id }}">
-                              {{ $produto->id.' - '.$produto->nome }}
-                            </option>
-                          @empty
-                            <option value="" selected>Nenhum produto cadastrado</option>
-                          @endforelse
-                        </select>
-                        
-                        @error('id_produto')
-                          <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                      </div>
-                    </div>
-
-                    <div class="form-group row">
-                      <label for="quantidade" class="col-3 col-form-label">Quantidade</label>
-                      <div class="col-9">
-                        <input type="number" id="quantidade" name="quantidade" value="1" class="form-control @error('quantidade') is-invalid @enderror" required>
-                        @error('quantidade')
-                          <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                      </div>
-                    </div>
-
-                    <div class="form-group row">
                       <label for="data_entrega" class="col-3 col-form-label">Entrega</label>
                       <div class="col-9">
                         <input type="date" id="data_entrega" name="data_entrega" class="form-control @error('data_entrega') is-invalid @enderror">
