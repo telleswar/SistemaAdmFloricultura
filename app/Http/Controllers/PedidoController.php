@@ -166,7 +166,7 @@ class PedidoController extends Controller
             $msg = 'Pedido finalizado com sucesso!';
         }          
         $pedido->save();     
-        $this->atualizarTotal($pedido,TRUE);                
+        $this->atualizarTotal($pedido,$pedido->status < 2);                
         
         return redirect( Route('home') )->with('sucess',$msg);
     }
@@ -182,7 +182,7 @@ class PedidoController extends Controller
         if (count($pedido->itens_pedido) > 0) {
             foreach ($pedido->itens_pedido as $item) {
                 $produto = Produto::find($item->id_produto);
-                if ($pedido->status == 1) {
+                if ($pedido->status > 0) {
                     $produto->estoque = $produto->estoque + $item->quantidade;
                 }                
                 $item->delete();
