@@ -123,7 +123,7 @@
     <footer class="flooter d-flex-reverse mx-auto card-header fixed-bottom teste">
         <div class="container d-block">
             <div class="row d-block  text-center">
-                Desenvolvido por Antony Rairon & Leandro Marqueti
+                Desenvolvido por Antony Rairon, Leandro Marqueti & Evellyn
             </div>
         </div>
     </footer>
