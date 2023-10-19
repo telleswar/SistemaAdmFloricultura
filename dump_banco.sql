@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 04/07/2023 às 00:59
+-- Tempo de geração: 19/10/2023 às 20:57
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -42,9 +42,7 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id`, `nome`, `telefone`, `email`, `endereco`, `cpf`, `cnpj`) VALUES
-(1, 'Leandro', '(47)91234-1234', 'leandro@gmail.com', 'Rua teste, 123', '10347124976', '10344433377123'),
-(2, 'Antony Rairon', '(47)91234-1234', 'antony@gmail.com', 'Rua teste, 123', '103.471.249-76', ''),
-(17, 'Teste22', '(47)99762-2050', 'adm@gmail.com', 'Rua teste', '10347124976', NULL);
+(20, 'Antony', '(47)99762-2050', 'antony@gmail.com', 'Rua casa, 123', '103.471.249-76', NULL);
 
 -- --------------------------------------------------------
 
@@ -66,8 +64,7 @@ CREATE TABLE `fornecedor` (
 --
 
 INSERT INTO `fornecedor` (`id`, `nome`, `telefone`, `email`, `endereco`, `cnpj`) VALUES
-(11, 'Pedro Flores', '(47)91234-1234', 'pedro@flores.com', 'Rua teste', '66.490.523/0001-71'),
-(24, 'Lucas Flores', '(47)99762-2050', 'lucas@flores.com', 'Rua teste', '99.581.213/0001-11');
+(27, 'Maria Flores', '(47)99762-2050', 'maria@flores.com', 'Rua teste, 1123', '48.123.448/0001-29');
 
 -- --------------------------------------------------------
 
@@ -88,10 +85,10 @@ CREATE TABLE `itens_pedido` (
 --
 
 INSERT INTO `itens_pedido` (`id`, `id_pedido`, `id_produto`, `quantidade`, `valor`) VALUES
-(1, 1, 1, 2, 5),
-(6, 13, 5, 1, 2),
-(7, 14, 2, 3, 33333),
-(8, 11, 2, 3, 33333);
+(49, 40, 22, 1, 3),
+(50, 41, 22, 2, 6),
+(51, 42, 22, 1, 3),
+(52, 42, 22, 2, 6);
 
 -- --------------------------------------------------------
 
@@ -112,14 +109,7 @@ CREATE TABLE `mov_estoque` (
 --
 
 INSERT INTO `mov_estoque` (`id`, `id_fornecedor`, `id_produto`, `quantidade`, `data`) VALUES
-(31, 11, 1, 1, '2001-10-05'),
-(32, 11, 1, 1, '2023-10-01'),
-(33, 11, 1, 1, '2023-06-06'),
-(34, 11, 1, 1, '2023-06-06'),
-(35, 11, 1, 1, '2023-01-01'),
-(36, 11, 1, 1, '2023-01-01'),
-(37, 11, 1, 1, '2023-01-01'),
-(38, 11, 1, 1, '2023-01-01');
+(40, 27, 22, 50, '2023-10-05');
 
 -- --------------------------------------------------------
 
@@ -148,18 +138,32 @@ CREATE TABLE `pedido` (
   `valor_total` float DEFAULT NULL,
   `data_criacao` datetime DEFAULT NULL,
   `data_entrega` datetime DEFAULT NULL,
-  `id_cliente` int(11) NOT NULL
+  `id_cliente` int(11) NOT NULL,
+  `status` smallint(6) DEFAULT 0,
+  `data_finalizacao` datetime DEFAULT NULL,
+  `data_upgrade` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `pedido`
 --
 
-INSERT INTO `pedido` (`id`, `valor_total`, `data_criacao`, `data_entrega`, `id_cliente`) VALUES
-(1, 5, '2023-03-06 00:40:33', '2023-03-06 00:40:33', 1),
-(11, 33333, '2023-07-03 21:36:51', '2023-06-02 00:00:00', 2),
-(13, 2, '2023-07-03 22:11:22', '2023-06-06 00:00:00', 1),
-(14, 33333, '2023-07-03 22:19:38', '2023-06-02 00:00:00', 2);
+INSERT INTO `pedido` (`id`, `valor_total`, `data_criacao`, `data_entrega`, `id_cliente`, `status`, `data_finalizacao`, `data_upgrade`) VALUES
+(40, 3, '2023-10-19 18:35:56', '2023-10-26 00:00:00', 20, 0, NULL, NULL),
+(41, 6, '2023-10-19 18:36:01', '2023-10-27 00:00:00', 20, 1, NULL, '2023-10-19 00:00:00'),
+(42, 9, '2023-10-19 18:36:06', '2023-10-28 00:00:00', 20, 2, '2023-10-19 00:00:00', '2023-10-19 00:00:00');
+
+--
+-- Acionadores `pedido`
+--
+DELIMITER $$
+CREATE TRIGGER `att_status_pedido` BEFORE UPDATE ON `pedido` FOR EACH ROW IF NEW.status = 1 THEN
+   SET NEW.data_upgrade = NOW();
+ELSEIF NEW.status = 2 THEN
+   SET NEW.data_finalizacao = NOW();
+END IF
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -184,16 +188,7 @@ CREATE TABLE `produto` (
 --
 
 INSERT INTO `produto` (`id`, `nome`, `custo`, `tipo`, `descricao`, `preco_unitario`, `estoque`, `id_fornecedor`, `imagem`) VALUES
-(1, 'Girassol', 1.5, 'flor', 0x556d6120666c6f72206c696e6461, 2.5, 31, NULL, ''),
-(2, 'Flor2', 555.77, 'flor', 0x746573746531, 11111, 80, NULL, ''),
-(5, 'Flor3', 1, 'flor', NULL, 2, -1, NULL, ''),
-(6, 'Flor4', 1, 'flor', NULL, 2, 0, NULL, ''),
-(7, 'Flor 5', 1, 'flor', NULL, 2, 0, NULL, ''),
-(15, 'Flor 6', 0, 'flor', 0x61, 0, 0, NULL, ''),
-(16, 'Flor 7', 11.66, 'flor', NULL, 0, 0, NULL, ''),
-(19, 'Teste22', 0, 'Flor 8', 0x446573637269c3a7c3a36f, 0, 0, NULL, ''),
-(20, 'Teste22', 0, 'Flor2', 0x5465737465, 0, 0, NULL, '7e9303915d3db9fc71534dc9197708bc.jpg'),
-(21, 'Teste22', 0, 'Flor2', NULL, 0, 0, NULL, '');
+(22, 'Girassol', 1.5, 'Flor', 0x556d6120666c6f7220616d6172656c61, 3, 17, NULL, '24224d7451c1356c5bcb7af044183b04.webp');
 
 -- --------------------------------------------------------
 
@@ -217,7 +212,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(13, 'Administrador', 'adm@gmail.com', NULL, '$2y$10$jEXUXfi06kGK1sYdisZQnOBRNFq8M91VVajkMC1gLE/jgi6BLJFdm', 'MjauMQ0KB7U3MaO7sgKxHfOfvapB6tbBuA0JCTL1Z6PhK6WwezfjX0EbxrYo', '2023-03-06 02:25:31', '2023-05-08 18:44:28'),
+(13, 'Administrador', 'adm@gmail.com', NULL, '$2y$10$jEXUXfi06kGK1sYdisZQnOBRNFq8M91VVajkMC1gLE/jgi6BLJFdm', '6jGFYL8SF0r9rLsjLSLRTWsNKCd08QbGeIKN42DB9hoOuMO7lzeKeyPsj5dY', '2023-03-06 02:25:31', '2023-05-08 18:44:28'),
 (14, 'teste', 'teste@teste', NULL, '$2y$10$gTd6tKXw6S3YNbr6AMHMKu3mz9/hYEYxhkJB4DluxVq2YU42qIt8O', NULL, '2023-05-08 01:20:25', '2023-05-08 01:20:25');
 
 --
@@ -289,43 +284,43 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de tabela `fornecedor`
 --
 ALTER TABLE `fornecedor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de tabela `itens_pedido`
 --
 ALTER TABLE `itens_pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT de tabela `mov_estoque`
 --
 ALTER TABLE `mov_estoque`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT de tabela `mov_financeira`
 --
 ALTER TABLE `mov_financeira`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT de tabela `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de tabela `users`

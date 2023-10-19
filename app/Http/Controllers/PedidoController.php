@@ -49,9 +49,10 @@ class PedidoController extends Controller
         $pedido->data_criacao = Carbon::now();
         $pedido->data_entrega = $request->data_entrega;
         $pedido->id_cliente = $request->id_cliente;
+        $pedido->status = 0; //Orçamento
         $pedido->save();
 
-        return redirect( Route('home') )->with('sucess','Novo pedido cadastrado com sucesso!');
+        return redirect( Route('home') )->with('sucess','Novo orçamento criado com sucesso!');
     }
 
     /**
@@ -95,7 +96,12 @@ class PedidoController extends Controller
 
         $pedido->save();
 
-        return redirect( Route('home') )->with('sucess','Pedido editado com sucesso!');
+        $str = 'Orçamento';
+        if($pedido->status == 1){
+            $str = 'Pedido';
+        }
+
+        return redirect( Route('home') )->with('sucess',$str.' editado com sucesso!');
     }
 
     public function add(Request $request, Pedido $pedido)
@@ -112,13 +118,57 @@ class PedidoController extends Controller
         $itens->quantidade = $request->quantidade;
 
         $itens->valor = (float) $request->quantidade * $produto->preco_unitario;
-        $produto->estoque = $produto->estoque - $request->quantidade;
+
+        if ($pedido->status == 1) {
+            $produto->estoque = $produto->estoque - $request->quantidade;
+        }
 
         $itens->save();
         $pedido->save();
         $produto->save();
 
-        return redirect( Route('home') )->with('sucess','Pedido editado com sucesso!');
+        $this->atualizarTotal($pedido,FALSE);
+
+        $str = 'Orçamento';
+        if($pedido->status == 1){
+            $str = 'Pedido';
+        }
+
+        return redirect( Route('home') )->with('sucess',$str.' atualizado com sucesso!');
+    }
+
+    private function atualizarTotal(Pedido $pedido,$countEstoque)
+    {
+        $total = 0;
+        foreach ($pedido->itens_pedido as $item) {
+            $produto = $item->produto;
+            if($countEstoque == TRUE){
+                $produto->estoque = $produto->estoque - $item->quantidade;
+            }
+            $produto->save();
+            $total = $total + $item->valor;
+        } 
+        $pedido->valor_total = $total;
+        $pedido->save();    
+    }
+
+    public function upgrade(Pedido $pedido)
+    {
+        //0 - Orçamento
+        //1- Pedido
+        //2- Finalizado
+        $msg = '';
+        if($pedido->status == 0){
+            $pedido->status = 1; 
+            $msg = 'Pedido criado com sucesso!';
+        }elseif($pedido->status == 1){
+            $pedido->status = 2;  
+            $msg = 'Pedido finalizado com sucesso!';
+        }          
+        $pedido->save();     
+        $this->atualizarTotal($pedido,TRUE);                
+        
+        return redirect( Route('home') )->with('sucess',$msg);
     }
 
     /**
@@ -132,7 +182,9 @@ class PedidoController extends Controller
         if (count($pedido->itens_pedido) > 0) {
             foreach ($pedido->itens_pedido as $item) {
                 $produto = Produto::find($item->id_produto);
-                $produto->estoque = $produto->estoque + $item->quantidade;
+                if ($pedido->status == 1) {
+                    $produto->estoque = $produto->estoque + $item->quantidade;
+                }                
                 $item->delete();
                 $produto->save();
             }
@@ -140,6 +192,11 @@ class PedidoController extends Controller
         
         $pedido->delete();               
         
-        return redirect(Route('home'))->with('sucess','Pedido deletado com sucesso!');
+        $str = 'Orçamento';
+        if($pedido->status == 1){
+            $str = 'Pedido';
+        }
+
+        return redirect( Route('home') )->with('sucess',$str.' deletado com sucesso!');
     }
 }

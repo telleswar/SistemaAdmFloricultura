@@ -21,4 +21,9 @@ class Cliente extends Model
         'cpf',
         'cnpj',
     ];
+
+    public function pedidos()
+    {
+        return $this->hasMany(Pedido::class,'id_cliente');
+    }
 }

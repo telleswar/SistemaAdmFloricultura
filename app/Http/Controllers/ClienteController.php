@@ -14,6 +14,9 @@ class ClienteController extends Controller
     }
 
     public function destroy(Cliente $cliente){
+        if (count($cliente->pedidos) > 0) {
+            return redirect(Route('clientes.index'))->with('warning','Cliente possui um ou mais pedidos vinculados!');
+        }
         $cliente->delete();
         return redirect(Route('clientes.index'))->with('sucess','Cliente deletado com sucesso!');
     }

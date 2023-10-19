@@ -27,6 +27,11 @@
                 <p class="self-center"><strong>Sucesso  </strong>{{session('sucess')}}</p>
                 <strong class="text-x1 align-center cursor-pointer alert-del">&times;</strong>
             </div>  
+        @elseif (session('warning'))
+            <div id="alerta"class="flex justify-between text-yellow-200 shadow-inner rounded p-3 bg-yellow-500">
+                <p class="self-center"><strong>Aviso  </strong>{{session('warning')}}</p>
+                <strong class="text-x1 align-center cursor-pointer alert-del">&times;</strong>
+            </div>  
         @endif
 
         
@@ -62,7 +67,11 @@
             {{$Clientes->links()}}
         </div>
        
-        <hr class="mt-3 mb-3">
+        @if (count($Clientes) > 0)
+            <hr class="mt-3 mb-3"> 
+        @else
+            <h5 class="mb-4 text-left h3-titulo">Você não tem nenhum cliente cadastrado.</h5>
+        @endif
     </div>
 </div>
 @endsection

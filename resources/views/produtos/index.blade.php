@@ -75,8 +75,13 @@
             @endforeach
             {{$Produtos->links()}}
         </div>
-       
-        <hr class="mt-3 mb-3">
+        
+        @if (count($Produtos) > 0)
+            <hr class="mt-3 mb-3"> 
+        @else
+            <h5 class="mb-4 text-left h3-titulo">Você não tem nenhum produto cadastrado.</h5>
+        @endif
+
     </div>
 </div>
 @endsection

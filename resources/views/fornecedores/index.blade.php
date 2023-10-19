@@ -58,10 +58,11 @@
                     </div>
                 </div>
                 @include('fornecedores.edit')
+                <hr class="mt-3 mb-3">
             @empty
-                <p style="color: #d57891">Não há registros...</p>
+                <h5 class="mb-4 text-left h3-titulo">Você não tem nenhum fornecedor cadastrado.</h5>
             @endforelse
-            <hr class="mt-3 mb-3">
+            
             {{$Fornecedores->links()}}
         </div>
         

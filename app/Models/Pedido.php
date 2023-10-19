@@ -12,13 +12,16 @@ class Pedido extends Model
     protected $table = 'pedido';
     public $timestamps = false;
 
-    protected $dates = ['data_criacao','data_entrega'];
+    protected $dates = ['data_criacao','data_entrega','data_finalizacao','data_upgrade'];
 
     protected $fillable = [
         'numero',
         'valor_total',
         'data_criacao',
         'data_entrega',
+        'status',
+        'data_finalizacao',
+        'data_upgrade'
     ];
 
     public function cliente(){
