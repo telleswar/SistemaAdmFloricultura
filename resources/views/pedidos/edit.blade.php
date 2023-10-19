@@ -6,7 +6,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Edição de pedido</h3>
+                <h3 class="modal-title">Edição de @if($pedido->status == 0) orçamento @else pedido @endif</h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
             </div>
             <div class="modal-body">

@@ -4,7 +4,7 @@
   <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
           <div class="modal-header">
-              <h3 class="modal-title text-xl font-bold">Confirmação - #{{$pedido->id}}</h3>
+              <h3 class="modal-title text-xl font-bold">Excluir @if($pedido->status == 0) orçamento @else pedido @endif #{{$pedido->id}}</h3>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
           </div>
           <div class="modal-body text-left">
