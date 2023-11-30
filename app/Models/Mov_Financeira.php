@@ -27,4 +27,12 @@ class Mov_Financeira extends Model
     public function cliente(){
         return $this->belongsTo(Cliente::class,'id_cliente');
     }
+
+    public function mov_estoque(){
+        return $this->belongsTo(Mov_Estoque::class,'id_mov_estoque');
+    }
+
+    public function pedido(){
+        return $this->belongsTo(Pedido::class,'id_pedido');
+    }
 }

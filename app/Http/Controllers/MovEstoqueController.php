@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mov_Estoque;
 use App\Models\Produto;
+use App\Models\Mov_Financeira;
 use App\Models\Fornecedor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -61,6 +62,21 @@ class MovEstoqueController extends Controller
         $produto = Produto::find($mov_estoque->id_produto);
         $produto->estoque = $produto->estoque + $mov_estoque->quantidade;
         $produto->save();
+
+        $req = [
+            'id_fornecedor' => $request->id_fornecedor,
+            'valor' =>  $produto->custo * $mov_estoque->quantidade,
+            'data_limite' => $request->data,
+            'data_pagto' => $request->data,
+            'tipo' => "DESP"
+        ];
+       
+        $mov_fin = new Mov_Financeira;
+        $mov_fin->id_fornecedor = $request->id_fornecedor;
+        $mov_fin->fill($req);
+        $mov_fin->id_mov_estoque = $mov_estoque->id;
+        $mov_fin->save();
+
 
         return redirect( Route('movs_estoque.index') )->with('sucess','Novo lançamento de estoque cadastrado com sucesso!');
     }

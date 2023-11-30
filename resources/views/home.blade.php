@@ -45,6 +45,8 @@
                         bg-info
                     @elseif ($pedido->status == 2)
                         bg-success
+                    @elseif ($pedido->status == 3)
+                        bg-danger
                     @endif ">    
                         @if ($pedido->status == 0)
                             <span class="badge bg-warning">Orçamento</span> 
@@ -52,6 +54,8 @@
                             <span class="badge bg-info">Pedido</span> 
                         @elseif($pedido->status == 2)
                             <span class="badge bg-success">Finalizado em {{ \Carbon\Carbon::parse($pedido->data_finalizacao)->format('d/m/Y')}}</span> 
+                        @elseif ($pedido->status == 3)
+                            <span class="badge bg-danger">Cancelado</span> 
                         @endif                   
                         <div class="card-header">
                             <h2 class="card-nome-cliente"><ion-icon name="reader-outline"></ion-icon># {{$pedido->id}} | {{ \Carbon\Carbon::parse($pedido->data_entrega)->format('d/m/Y')}}</p>
@@ -91,7 +95,7 @@
                                     <td class="card-text">ㅤ</td>
                                     <td class="card-text"></td>
                                     <td class="card-text">Total:ㅤ</td>
-                                    <td class="card-text">R$ {{number_format((float) $total, 2)}}</td>
+                                    <td class="card-text">R$ {{number_format((float) $pedido->valor_total, 2)}}</td>
                                 </tr> 
                                 </table>
                             @else
@@ -102,7 +106,7 @@
                         </div>
                         <div class="card-footer">
                             
-                            @if ($pedido->status !== 2)
+                            @if ($pedido->status < 2)
                                 <button class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#editar-{{$pedido->id}}">
                                     <ion-icon name="pencil-outline" title="Editar"></ion-icon>
                                 </button>
@@ -114,14 +118,24 @@
                                 @include('pedidos.upgrade')
                                 <button class="btn btn-warning " data-bs-toggle="modal" data-bs-target="#upgrade-{{$pedido->id}}">
                                     <ion-icon name="swap-horizontal-outline"></ion-icon>
-                                </button>    
+                                </button>  
+                                
+                                @if ($pedido->status == 1)
+                                     @include('pedidos.cancelar')
+                                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelar-{{$pedido->id}}">
+                                        <ion-icon name="close-outline" title="Cancelar"></ion-icon>
+                                    </button>       
+                                @else
+                                    @include('pedidos.delete')
+                                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-{{$pedido->id}}">
+                                        <ion-icon name="trash-outline" title="Excluir"></ion-icon>
+                                    </button>   
+                                @endif
+                                
                             @endif
                             
 
-                            @include('pedidos.delete')
-                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-{{$pedido->id}}">
-                                <ion-icon name="trash-outline" title="Excluir"></ion-icon>
-                            </button>
+                            
                         </div>
                     </div>
                 </div>

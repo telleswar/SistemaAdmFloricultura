@@ -47,6 +47,18 @@
                       </div>
                     </div>
 
+                    @if (count($pedido->itens_pedido) > 0) 
+                      <div class="form-group row">
+                        <label for="valor_total" class="col-3 col-form-label" >Valor total</label>    
+                        <div class="col-9">
+                          <input class="form-control @error('valor_total') is-invalid @enderror" type="currency" name="valor_total" id="valor_total" value="{{$pedido->valor_total}}">
+                          @error('valor_total')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                          @enderror
+                        </div>
+                      </div>
+                    @endif
+
                     <div class="form-group row">
                       <div class="offset-3 col-8">
                         <button id="submit" name="submit" type="submit" class="btn btn-success">Salvar</button>

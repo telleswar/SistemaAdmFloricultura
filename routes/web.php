@@ -63,6 +63,7 @@ Route::post('/pedidos/salvar',[PedidoController::class,'store'])->middleware('au
 Route::post('/pedidos/atualizar/{pedido}',[PedidoController::class,'update'])->middleware('auth')->name('pedidos.update');
 Route::post('/pedidos/adicionar/{pedido}',[PedidoController::class,'add'])->middleware('auth')->name('pedidos.add');
 Route::get('/pedidos/transformar/{pedido}',[PedidoController::class,'upgrade'])->middleware('auth')->name('pedidos.upgrade');
+Route::get('/pedidos/cancelar/{pedido}',[PedidoController::class,'cancelar'])->middleware('auth')->name('pedidos.cancelar');
 
 
 
