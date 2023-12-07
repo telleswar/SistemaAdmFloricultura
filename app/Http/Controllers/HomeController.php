@@ -13,7 +13,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $Pedidos = Pedido::paginate(8);
+        $Pedidos = Pedido::orderBy('data_criacao', 'desc')->paginate(8);
         $Clientes = Cliente::All();
         $Produtos = Produto::All();
 

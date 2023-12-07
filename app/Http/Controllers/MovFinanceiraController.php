@@ -16,7 +16,7 @@ class MovFinanceiraController extends Controller
      */
     public function index()
     {
-        $Movs_financeira = Mov_Financeira::paginate(8);
+        $Movs_financeira = Mov_Financeira::orderBy('id', 'desc')->paginate(8); 
         $Clientes = Cliente::All();
         $Fornecedores = Fornecedor::All();
 

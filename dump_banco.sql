@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07/12/2023 às 18:16
+-- Tempo de geração: 19/10/2023 às 20:57
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -37,6 +37,13 @@ CREATE TABLE `cliente` (
   `cnpj` varchar(14) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `cliente`
+--
+
+INSERT INTO `cliente` (`id`, `nome`, `telefone`, `email`, `endereco`, `cpf`, `cnpj`) VALUES
+(20, 'Antony', '(47)99762-2050', 'antony@gmail.com', 'Rua casa, 123', '103.471.249-76', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -52,6 +59,13 @@ CREATE TABLE `fornecedor` (
   `cnpj` varchar(18) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `fornecedor`
+--
+
+INSERT INTO `fornecedor` (`id`, `nome`, `telefone`, `email`, `endereco`, `cnpj`) VALUES
+(27, 'Maria Flores', '(47)99762-2050', 'maria@flores.com', 'Rua teste, 1123', '48.123.448/0001-29');
+
 -- --------------------------------------------------------
 
 --
@@ -66,6 +80,16 @@ CREATE TABLE `itens_pedido` (
   `valor` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `itens_pedido`
+--
+
+INSERT INTO `itens_pedido` (`id`, `id_pedido`, `id_produto`, `quantidade`, `valor`) VALUES
+(49, 40, 22, 1, 3),
+(50, 41, 22, 2, 6),
+(51, 42, 22, 1, 3),
+(52, 42, 22, 2, 6);
+
 -- --------------------------------------------------------
 
 --
@@ -73,12 +97,19 @@ CREATE TABLE `itens_pedido` (
 --
 
 CREATE TABLE `mov_estoque` (
-  `id` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `id_fornecedor` int(11) NOT NULL,
   `id_produto` int(11) NOT NULL,
   `quantidade` int(11) DEFAULT 0,
   `data` date DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `mov_estoque`
+--
+
+INSERT INTO `mov_estoque` (`id`, `id_fornecedor`, `id_produto`, `quantidade`, `data`) VALUES
+(40, 27, 22, 50, '2023-10-05');
 
 -- --------------------------------------------------------
 
@@ -93,9 +124,7 @@ CREATE TABLE `mov_financeira` (
   `valor` float DEFAULT NULL,
   `tipo` varchar(15) DEFAULT NULL,
   `data_limite` datetime DEFAULT NULL,
-  `data_pagto` datetime DEFAULT NULL,
-  `id_mov_estoque` int(11) DEFAULT NULL,
-  `id_pedido` int(11) DEFAULT NULL
+  `data_pagto` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -114,6 +143,15 @@ CREATE TABLE `pedido` (
   `data_finalizacao` datetime DEFAULT NULL,
   `data_upgrade` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `pedido`
+--
+
+INSERT INTO `pedido` (`id`, `valor_total`, `data_criacao`, `data_entrega`, `id_cliente`, `status`, `data_finalizacao`, `data_upgrade`) VALUES
+(40, 3, '2023-10-19 18:35:56', '2023-10-26 00:00:00', 20, 0, NULL, NULL),
+(41, 6, '2023-10-19 18:36:01', '2023-10-27 00:00:00', 20, 1, NULL, '2023-10-19 00:00:00'),
+(42, 9, '2023-10-19 18:36:06', '2023-10-28 00:00:00', 20, 2, '2023-10-19 00:00:00', '2023-10-19 00:00:00');
 
 --
 -- Acionadores `pedido`
@@ -144,6 +182,13 @@ CREATE TABLE `produto` (
   `id_fornecedor` int(11) DEFAULT NULL,
   `imagem` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `produto`
+--
+
+INSERT INTO `produto` (`id`, `nome`, `custo`, `tipo`, `descricao`, `preco_unitario`, `estoque`, `id_fornecedor`, `imagem`) VALUES
+(22, 'Girassol', 1.5, 'Flor', 0x556d6120666c6f7220616d6172656c61, 3, 17, NULL, '24224d7451c1356c5bcb7af044183b04.webp');
 
 -- --------------------------------------------------------
 
@@ -208,9 +253,7 @@ ALTER TABLE `mov_estoque`
 ALTER TABLE `mov_financeira`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_fornecedor` (`id_fornecedor`),
-  ADD KEY `id_cliente` (`id_cliente`),
-  ADD KEY `id_mov_estoque` (`id_mov_estoque`),
-  ADD KEY `id_pedido` (`id_pedido`);
+  ADD KEY `id_cliente` (`id_cliente`);
 
 --
 -- Índices de tabela `pedido`
@@ -241,43 +284,43 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de tabela `fornecedor`
 --
 ALTER TABLE `fornecedor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de tabela `itens_pedido`
 --
 ALTER TABLE `itens_pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT de tabela `mov_estoque`
 --
 ALTER TABLE `mov_estoque`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT de tabela `mov_financeira`
 --
 ALTER TABLE `mov_financeira`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT de tabela `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de tabela `users`
@@ -293,7 +336,7 @@ ALTER TABLE `users`
 -- Restrições para tabelas `itens_pedido`
 --
 ALTER TABLE `itens_pedido`
-  ADD CONSTRAINT `itens_pedido_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `itens_pedido_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id`),
   ADD CONSTRAINT `itens_pedido_ibfk_2` FOREIGN KEY (`id_produto`) REFERENCES `produto` (`id`);
 
 --
@@ -308,9 +351,7 @@ ALTER TABLE `mov_estoque`
 --
 ALTER TABLE `mov_financeira`
   ADD CONSTRAINT `mov_financeira_ibfk_1` FOREIGN KEY (`id_fornecedor`) REFERENCES `fornecedor` (`id`),
-  ADD CONSTRAINT `mov_financeira_ibfk_2` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`),
-  ADD CONSTRAINT `mov_financeira_ibfk_3` FOREIGN KEY (`id_mov_estoque`) REFERENCES `mov_estoque` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `mov_financeira_ibfk_4` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `mov_financeira_ibfk_2` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`);
 
 --
 -- Restrições para tabelas `pedido`
