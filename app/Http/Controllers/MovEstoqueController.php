@@ -19,7 +19,7 @@ class MovEstoqueController extends Controller
     public function index()
     {
         $Movs_estoque = Mov_Estoque::paginate(8);
-        $Produtos = Produto::All();
+        $Produtos = Produto::where('tipo', '!=', 'Serviço')->get();
         $Fornecedores = Fornecedor::All();
 
         return view('movs_estoque.index',compact(['Movs_estoque','Produtos','Fornecedores']));
